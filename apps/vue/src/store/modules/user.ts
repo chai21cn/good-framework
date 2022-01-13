@@ -1,4 +1,3 @@
-import type { UserInfo } from '/#/store';
 import type { ErrorMessageMode } from '/#/axios';
 import { defineStore } from 'pinia';
 import { store } from '/@/store';
@@ -7,6 +6,7 @@ import { PageEnum } from '/@/enums/pageEnum';
 import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum';
 import { getAuthCache, setAuthCache } from '/@/utils/auth';
 import { GetUserInfoModel, LoginParams } from '/@/api/sys/model/userModel';
+import { useAbpStoreWithOut } from './abp';
 import { doLogout, getUserInfo, loginApi } from '/@/api/sys/user';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { useMessage } from '/@/hooks/web/useMessage';
@@ -18,7 +18,7 @@ import { isArray } from '/@/utils/is';
 import { h } from 'vue';
 
 interface UserState {
-  userInfo: Nullable<UserInfo>;
+  userInfo: Nullable<GetUserInfoModel>;
   token?: string;
   roleList: RoleEnum[];
   sessionTimeout?: boolean;
@@ -40,8 +40,8 @@ export const useUserStore = defineStore({
     lastUpdateTime: 0,
   }),
   getters: {
-    getUserInfo(): UserInfo {
-      return this.userInfo || getAuthCache<UserInfo>(USER_INFO_KEY) || {};
+    getUserInfo(): GetUserInfoModel {
+      return this.userInfo || getAuthCache<GetUserInfoModel>(USER_INFO_KEY) || {};
     },
     getToken(): string {
       return this.token || getAuthCache<string>(TOKEN_KEY);
@@ -65,7 +65,7 @@ export const useUserStore = defineStore({
       this.roleList = roleList;
       setAuthCache(ROLES_KEY, roleList);
     },
-    setUserInfo(info: UserInfo | null) {
+    setUserInfo(info: GetUserInfoModel) {
       this.userInfo = info;
       this.lastUpdateTime = new Date().getTime();
       setAuthCache(USER_INFO_KEY, info);
@@ -74,10 +74,12 @@ export const useUserStore = defineStore({
       this.sessionTimeout = flag;
     },
     resetState() {
-      this.userInfo = null;
-      this.token = '';
-      this.roleList = [];
-      this.sessionTimeout = false;
+      this.setUserInfo({});
+      this.setToken('');
+      this.setRoleList([]);
+      this.setSessionTimeout(false);
+      const abpStore = useAbpStoreWithOut();
+      abpStore.resetSession();
     },
     /**
      * @description: login
@@ -91,10 +93,8 @@ export const useUserStore = defineStore({
       try {
         const { goHome = true, mode, ...loginParams } = params;
         const data = await loginApi(loginParams, mode);
-        const { token } = data;
-
-        // save token
-        this.setToken(token);
+        const { access_token } = data;
+        this.setToken(access_token);
         return this.afterLoginAction(goHome);
       } catch (error) {
         return Promise.reject(error);
@@ -122,34 +122,38 @@ export const useUserStore = defineStore({
       }
       return userInfo;
     },
-    async getUserInfoAction(): Promise<UserInfo | null> {
-      if (!this.getToken) return null;
+    async getUserInfoAction(): Promise<GetUserInfoModel> {
+      const abpStore = useAbpStoreWithOut();
+      await abpStore.initlizeAbpApplication();
       const userInfo = await getUserInfo();
-      const { roles = [] } = userInfo;
-      if (isArray(roles)) {
-        const roleList = roles.map((item) => item.value) as RoleEnum[];
-        this.setRoleList(roleList);
-      } else {
-        userInfo.roles = [];
-        this.setRoleList([]);
+      const currentUser = abpStore.getApplication.currentUser;
+
+      const outgoingUserInfo: { [key: string]: any } = {
+        // 从 currentuser 接口获取
+        userId: currentUser.id,
+        username: currentUser.userName,
+        roles: currentUser.roles,
+        // 从 userinfo 端点获取
+        realName: userInfo.nickname,
+        phoneNumber: userInfo.phone_number,
+        phoneNumberConfirmed: userInfo.phone_number_verified === 'True',
+        email: userInfo.email,
+        emailConfirmed: userInfo.email_verified === 'True',
+      };
+      if (userInfo.avatarUrl) {
+        outgoingUserInfo.avatar = formatUrl(userInfo.avatarUrl);
       }
-      this.setUserInfo(userInfo);
-      return userInfo;
+      this.setUserInfo(outgoingUserInfo);
+
+      return outgoingUserInfo;
     },
     /**
      * @description: logout
      */
     async logout(goLogin = false) {
-      if (this.getToken) {
-        try {
-          await doLogout();
-        } catch {
-          console.log('注销Token失败');
-        }
-      }
       this.setToken(undefined);
       this.setSessionTimeout(false);
-      this.setUserInfo(null);
+      this.setUserInfo({});
       goLogin && router.push(PageEnum.BASE_LOGIN);
     },
 

@@ -200,7 +200,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
         // See https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#authentication_schemes
         // authentication schemes，e.g: Bearer
         // authenticationScheme: 'Bearer',
-        authenticationScheme: '',
+        authenticationScheme: 'Bearer',
         timeout: 10 * 1000,
         // 基础接口地址
         // baseURL: globSetting.apiUrl,
@@ -217,7 +217,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           // 是否返回原生响应头 比如：需要获取响应头时使用该属性
           isReturnNativeResponse: false,
           // 需要对返回数据进行处理
-          isTransformResponse: true,
+          isTransformResponse: false,
           // post请求的时候添加参数到url
           joinParamsToUrl: false,
           // 格式化提交参数时间
