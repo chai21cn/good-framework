@@ -3,8 +3,8 @@ import { IApplicationConfiguration } from './model/appModel';
 import { ApplicationApiDescriptionModel } from './model/apiDefinition';
 
 enum Api {
-  ApplicationConfiguration = '/abp/application-configuration',
-  ApiDefinition = '/abp/api-definition',
+  ApplicationConfiguration = '/api/abp/application-configuration',
+  ApiDefinition = '/api/abp/api-definition',
 }
 
 export const getApplicationConfiguration = () => {
