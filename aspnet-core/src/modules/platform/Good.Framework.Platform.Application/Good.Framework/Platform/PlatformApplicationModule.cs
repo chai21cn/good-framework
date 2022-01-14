@@ -4,7 +4,7 @@ using Volo.Abp.Modularity;
 
 namespace Good.Framework.Platform
 {
-    [DependsOn(typeof(PlatformApplicationContractModule))]
+    [DependsOn(typeof(PlatformApplicationContractsModule))]
     public class PlatformApplicationModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)

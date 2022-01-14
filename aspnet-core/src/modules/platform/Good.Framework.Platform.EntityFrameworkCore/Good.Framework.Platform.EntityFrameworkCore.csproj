@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\..\..\common.props" />
 
@@ -8,11 +8,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="5.0.1" />
+		<ProjectReference Include="..\Good.Framework.Platform.Domain\Good.Framework.Platform.Domain.csproj" />
+		<PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="5.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Good.Framework.Platform.Domain\Good.Framework.Platform.Domain.csproj" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+			<PrivateAssets>compile; contentFiles; build; buildMultitargeting; buildTransitive; analyzers; native</PrivateAssets>
+		</PackageReference>
 	</ItemGroup>
 
 </Project>

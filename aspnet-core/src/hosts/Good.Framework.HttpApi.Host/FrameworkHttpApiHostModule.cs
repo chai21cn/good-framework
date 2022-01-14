@@ -28,15 +28,21 @@ using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
+using Good.Framework.Platform.HttpApi;
+using Good.Framework.Platform;
+using Good.Framework.Platform.EntityFrameworkCore;
 
 namespace Good.Framework
 {
     [DependsOn(
         typeof(FrameworkHttpApiModule),
-        typeof(AbpAutofacModule),
-        typeof(AbpAspNetCoreMultiTenancyModule),
         typeof(FrameworkApplicationModule),
         typeof(FrameworkEntityFrameworkCoreModule),
+        typeof(PlatformHttpApiModule),
+        typeof(PlatformApplicationModule),
+        typeof(PlatformEntityFrameworkCoreModule),
+        typeof(AbpAutofacModule),
+        typeof(AbpAspNetCoreMultiTenancyModule),
         typeof(AbpAspNetCoreMvcUiBasicThemeModule),
         typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
         typeof(AbpAccountWebIdentityServerModule),

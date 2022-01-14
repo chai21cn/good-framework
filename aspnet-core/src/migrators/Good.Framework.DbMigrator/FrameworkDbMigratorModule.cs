@@ -1,4 +1,6 @@
 ﻿using Good.Framework.EntityFrameworkCore;
+using Good.Framework.Platform;
+using Good.Framework.Platform.EntityFrameworkCore;
 using Volo.Abp.Autofac;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Modularity;
@@ -8,7 +10,9 @@ namespace Good.Framework.DbMigrator
     [DependsOn(
         typeof(AbpAutofacModule),
         typeof(FrameworkEntityFrameworkCoreModule),
-        typeof(FrameworkApplicationContractsModule)
+        typeof(FrameworkApplicationContractsModule),
+        typeof(PlatformEntityFrameworkCoreModule),
+        typeof(PlatformApplicationContractsModule)
         )]
     public class FrameworkDbMigratorModule : AbpModule
     {

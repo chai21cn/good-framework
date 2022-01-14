@@ -1,10 +1,11 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using Good.Framework.Data;
+using Good.Framework.Platform.Migrators;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Good.Framework.Data;
 using Serilog;
+using System.Threading;
+using System.Threading.Tasks;
 using Volo.Abp;
 
 namespace Good.Framework.DbMigrator
@@ -31,9 +32,14 @@ namespace Good.Framework.DbMigrator
             {
                 application.Initialize();
 
+                //await application
+                //    .ServiceProvider
+                //    .GetRequiredService<FrameworkDbMigrationService>()
+                //    .MigrateAsync();
+
                 await application
                     .ServiceProvider
-                    .GetRequiredService<FrameworkDbMigrationService>()
+                    .GetRequiredService<PlatformDbMigrationService>()
                     .MigrateAsync();
 
                 application.Shutdown();

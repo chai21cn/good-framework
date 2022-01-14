@@ -1,4 +1,4 @@
-import type { AppRouteRecordRaw, Menu } from '/@/router/types';
+import type { AppRouteRecordRaw, Menu, RouteMeta } from '/@/router/types';
 
 import { defineStore } from 'pinia';
 import { store } from '/@/store';
@@ -8,7 +8,7 @@ import { useAbpStoreWithOut } from './abp';
 import { useAppStoreWithOut } from './app';
 import { toRaw } from 'vue';
 import { transformObjToRoute, flatMultiLevelRoutes } from '/@/router/helper/routeHelper';
-import { transformRouteToMenu } from '/@/router/helper/menuHelper';
+import { transformRouteToMenu, generateTree, mapMetaBoolean } from '/@/router/helper/menuHelper';
 
 import projectSetting from '/@/settings/projectSetting';
 
@@ -20,9 +20,9 @@ import { ERROR_LOG_ROUTE, PAGE_NOT_FOUND_ROUTE } from '/@/router/routes/basic';
 import { filter } from '/@/utils/helper/treeHelper';
 
 import { getMenuList } from '/@/api/sys/menu';
-// import { getPermCode } from '/@/api/sys/user';
 
 import { useMessage } from '/@/hooks/web/useMessage';
+import { RouteItem } from '/@/api/sys/model/menuModel';
 import { PageEnum } from '/@/enums/pageEnum';
 
 interface PermissionState {
@@ -94,8 +94,6 @@ export const usePermissionStore = defineStore({
       this.lastBuildMenuTime = 0;
     },
     async changePermissionCode() {
-      // const codeList = await getPermCode();
-      // this.setPermCodeList(codeList);
       const abpStore = useAbpStoreWithOut();
       const grantedPolicies = abpStore.getApplication.auth.grantedPolicies;
       const authPermissions = new Array<string>();
@@ -197,7 +195,9 @@ export const usePermissionStore = defineStore({
           let routeList: AppRouteRecordRaw[] = [];
           try {
             this.changePermissionCode();
-            routeList = (await getMenuList()) as AppRouteRecordRaw[];
+            const menuResult = await getMenuList();
+            const menuList = generateTree(menuResult.items) as RouteItem[];
+            routeList = this.filterDynamicRoutes(menuList);
           } catch (error) {
             console.error(error);
           }
@@ -221,6 +221,70 @@ export const usePermissionStore = defineStore({
       routes.push(ERROR_LOG_ROUTE);
       patchHomeAffix(routes);
       return routes;
+    },
+    filterDynamicRoutes(menus: RouteItem[]) {
+      const routeList: AppRouteRecordRaw[] = [];
+      menus.forEach((menu) => {
+        if (!this.validationFeatures(menu.meta)) {
+          return;
+        }
+        const r: AppRouteRecordRaw = {
+          path: menu.path,
+          name: menu.name!,
+          redirect: menu.redirect,
+          component: menu.component,
+          meta: {
+            affix: mapMetaBoolean('affix', menu.meta),
+            title: menu.meta.title,
+            icon: menu.meta.icon,
+            ignoreAuth: mapMetaBoolean('ignoreAuth', menu.meta),
+            ignoreKeepAlive: mapMetaBoolean('ignoreKeepAlive', menu.meta),
+            frameSrc: menu.meta.frameSrc,
+            frameFormat: menu.meta.frameFormat,
+            transitionName: menu.meta.transitionName,
+            hideBreadcrumb: mapMetaBoolean('hideBreadcrumb', menu.meta),
+            hideChildrenInMenu: mapMetaBoolean('hideChildrenInMenu', menu.meta),
+            carryParam: mapMetaBoolean('carryParam', menu.meta),
+            single: mapMetaBoolean('single', menu.meta),
+            currentActiveMenu: menu.meta.currentActiveMenu,
+            hideTab: mapMetaBoolean('hideTab', menu.meta),
+            hideMenu: mapMetaBoolean('hideMenu', menu.meta),
+            isLink: mapMetaBoolean('isLink', menu.meta),
+            roles: menu.meta.roles,
+          },
+        };
+        if (menu.children) {
+          r.children = this.filterDynamicRoutes(menu.children);
+        }
+        routeList.push(r);
+      });
+
+      return routeList;
+    },
+    /** 验证功能 */
+    validationFeatures(meta: RouteMeta) {
+      // 如果声明了必须某些功能而系统为启用此功能,则不加入路由中
+      if (meta.requiredFeatures) {
+        let featureHasEnabled = true;
+        const abpStore = useAbpStoreWithOut();
+        const { features } = abpStore.getApplication;
+        const definedFeatures = features.values;
+        if (definedFeatures === undefined) {
+          return featureHasEnabled;
+        }
+        let requiredFeatures = meta.requiredFeatures;
+        if (!Array.isArray(requiredFeatures)) {
+          requiredFeatures = requiredFeatures.split(',');
+        }
+        for (const i in requiredFeatures) {
+          if (definedFeatures[requiredFeatures[i]] === 'false') {
+            featureHasEnabled = false;
+            continue;
+          }
+        }
+        return featureHasEnabled;
+      }
+      return true;
     },
   },
 });

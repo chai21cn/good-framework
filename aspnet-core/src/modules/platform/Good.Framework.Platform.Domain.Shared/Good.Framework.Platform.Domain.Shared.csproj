@@ -8,6 +8,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Good.Framework\Platform\Layouts\**" />
+	  <EmbeddedResource Remove="Good.Framework\Platform\Layouts\**" />
+	  <None Remove="Good.Framework\Platform\Layouts\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Remove="Good.Framework\Platform\Localization\Resources\en.json" />
 		<None Remove="Good.Framework\Platform\Localization\Resources\zh-Hans.json" />
 	</ItemGroup>
@@ -19,10 +25,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="Volo.Abp.Validation" Version="5.0.1" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="Good.Framework\Platform\Layouts\" />
 	</ItemGroup>
 
 </Project>

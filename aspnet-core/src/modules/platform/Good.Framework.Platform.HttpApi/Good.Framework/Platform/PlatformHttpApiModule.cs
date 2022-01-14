@@ -6,7 +6,7 @@ using Volo.Abp.Modularity;
 namespace Good.Framework.Platform.HttpApi
 {
     [DependsOn(
-        typeof(PlatformApplicationContractModule),
+        typeof(PlatformApplicationContractsModule),
         typeof(AbpAspNetCoreMvcModule))]
     public class PlatformHttpApiModule : AbpModule
     {
@@ -14,7 +14,7 @@ namespace Good.Framework.Platform.HttpApi
         {
             PreConfigure<IMvcBuilder>(mvcBuilder =>
             {
-                mvcBuilder.AddApplicationPartIfNotExists(typeof(PlatformApplicationContractModule).Assembly);
+                mvcBuilder.AddApplicationPartIfNotExists(typeof(PlatformApplicationContractsModule).Assembly);
             });
         }
 

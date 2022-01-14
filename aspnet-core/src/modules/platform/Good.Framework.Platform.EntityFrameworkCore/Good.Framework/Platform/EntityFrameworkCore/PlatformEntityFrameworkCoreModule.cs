@@ -1,6 +1,7 @@
 using Good.Framework.Platform.Datas;
 using Good.Framework.Platform.Layouts;
 using Good.Framework.Platform.Menus;
+using Good.Framework.Platform.Migrators;
 using Good.Framework.Platform.Versions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,11 @@ namespace Good.Framework.Platform.EntityFrameworkCore
         typeof(AbpEntityFrameworkCoreModule))]
     public class PlatformEntityFrameworkCoreModule : AbpModule
     {
+        //public override void PreConfigureServices(ServiceConfigurationContext context)
+        //{
+        //    PlatformEfCoreEntityExtensionMappings.Configure();
+        //}
+
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             context.Services.AddAbpDbContext<PlatformDbContext>(options =>
@@ -32,6 +38,13 @@ namespace Good.Framework.Platform.EntityFrameworkCore
                     appVersion.DefaultWithDetailsFunc = (x) =>
                         x.Include(q => q.Files);
                 });
+            });
+
+            Configure<AbpDbContextOptions>(options =>
+            {
+                /* The main point to change your DBMS.
+                 * See also FrameworkMigrationsDbContextFactory for EF Core tooling. */
+                options.UseSqlServer();
             });
         }
     }

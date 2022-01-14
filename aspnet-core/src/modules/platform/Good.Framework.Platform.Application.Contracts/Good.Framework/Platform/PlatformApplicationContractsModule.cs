@@ -9,7 +9,7 @@ using Volo.Abp.VirtualFileSystem;
 namespace Good.Framework.Platform
 {
     [DependsOn(typeof(PlatformDomainSharedModule))]
-    public class PlatformApplicationContractModule : AbpModule
+    public class PlatformApplicationContractsModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
@@ -22,7 +22,7 @@ namespace Good.Framework.Platform
 
             Configure<AbpVirtualFileSystemOptions>(options =>
             {
-                options.FileSets.AddEmbedded<PlatformApplicationContractModule>();
+                options.FileSets.AddEmbedded<PlatformApplicationContractsModule>();
             });
 
             Configure<AbpLocalizationOptions>(options =>

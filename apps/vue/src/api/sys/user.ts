@@ -11,9 +11,9 @@ import { ContentTypeEnum } from '/@/enums/httpEnum';
 import { ErrorMessageMode } from '/#/axios';
 
 enum Api {
-  Login = '/token',
+  Login = '/connect/token',
   Logout = '/logout',
-  GetUserInfo = '/userinfo',
+  GetUserInfo = '/connect/userinfo',
   GetPermCode = '/getPermCode',
 }
 
@@ -81,12 +81,11 @@ export function getUserInfo() {
   return defHttp.get<GetUserInfoModel>(
     {
       url: Api.GetUserInfo,
-    },
+    }, 
     {
       errorMessageMode: 'none',
       apiUrl: '/connect',
-    },
-  );
+    });
 }
 
 export function getPermCode() {

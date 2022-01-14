@@ -6,6 +6,6 @@ namespace Good.Framework.Platform
 
         public static string DbSchema { get; set; } = null;
 
-        public const string ConnectionStringName = "AppPlatform";
+        public const string ConnectionStringName = "Default";
     }
 }
