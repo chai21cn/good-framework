@@ -10,6 +10,12 @@ namespace Good.Framework.Platform
     [DependsOn(typeof(AbpLocalizationModule))]
     public class PlatformDomainSharedModule : AbpModule
     {
+        public override void PreConfigureServices(ServiceConfigurationContext context)
+        {
+            PlatformGlobalFeatureConfigurator.Configure();
+            PlatformModuleExtensionConfigurator.Configure();
+        }
+
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             Configure<AbpVirtualFileSystemOptions>(options =>

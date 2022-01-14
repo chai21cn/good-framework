@@ -32,10 +32,10 @@ namespace Good.Framework.DbMigrator
             {
                 application.Initialize();
 
-                //await application
-                //    .ServiceProvider
-                //    .GetRequiredService<FrameworkDbMigrationService>()
-                //    .MigrateAsync();
+                await application
+                    .ServiceProvider
+                    .GetRequiredService<FrameworkDbMigrationService>()
+                    .MigrateAsync();
 
                 await application
                     .ServiceProvider

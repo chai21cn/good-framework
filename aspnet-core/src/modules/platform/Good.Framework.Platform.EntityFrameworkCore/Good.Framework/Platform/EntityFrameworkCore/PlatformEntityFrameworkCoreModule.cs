@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Modularity;
+using System.Linq;
 
 namespace Good.Framework.Platform.EntityFrameworkCore
 {
@@ -15,10 +16,10 @@ namespace Good.Framework.Platform.EntityFrameworkCore
         typeof(AbpEntityFrameworkCoreModule))]
     public class PlatformEntityFrameworkCoreModule : AbpModule
     {
-        //public override void PreConfigureServices(ServiceConfigurationContext context)
-        //{
-        //    PlatformEfCoreEntityExtensionMappings.Configure();
-        //}
+        public override void PreConfigureServices(ServiceConfigurationContext context)
+        {
+            PlatformEfCoreEntityExtensionMappings.Configure();
+        }
 
         public override void ConfigureServices(ServiceConfigurationContext context)
         {

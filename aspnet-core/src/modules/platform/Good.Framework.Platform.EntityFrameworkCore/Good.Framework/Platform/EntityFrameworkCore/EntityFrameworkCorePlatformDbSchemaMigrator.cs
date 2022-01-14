@@ -7,12 +7,12 @@ using Volo.Abp.DependencyInjection;
 
 namespace Good.Framework.Platform.EntityFrameworkCore
 {
-    public class EntityFrameworkCoreFrameworkDbSchemaMigrator
+    public class EntityFrameworkCorePlatformDbSchemaMigrator
         : IPlatformDbSchemaMigrator, ITransientDependency
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public EntityFrameworkCoreFrameworkDbSchemaMigrator(
+        public EntityFrameworkCorePlatformDbSchemaMigrator(
             IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
