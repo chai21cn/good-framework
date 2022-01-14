@@ -92,17 +92,13 @@ namespace Good.Framework
                 Configure<AbpVirtualFileSystemOptions>(options =>
                 {
                     options.FileSets.ReplaceEmbeddedByPhysical<FrameworkDomainSharedModule>(
-                        Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}Good.Framework.Domain.Shared"));
+                        Path.Combine(hostingEnvironment.ContentRootPath, "..", "..", "modules", "basic", "Good.Framework.Domain.Shared"));
                     options.FileSets.ReplaceEmbeddedByPhysical<FrameworkDomainModule>(
-                        Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}Good.Framework.Domain"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<FrameworkApplicationContractsModule>(
-                        Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}Good.Framework.Application.Contracts"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<FrameworkApplicationModule>(
-                        Path.Combine(hostingEnvironment.ContentRootPath,
-                            $"..{Path.DirectorySeparatorChar}Good.Framework.Application"));
+                        Path.Combine(hostingEnvironment.ContentRootPath, "..", "..", "modules", "basic", "Good.Framework.Domain"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<FrameworkDomainModule>(
+                        Path.Combine(hostingEnvironment.ContentRootPath, "..", "..", "modules", "basic", "Good.Framework.Application.Contracts"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<FrameworkDomainModule>(
+                        Path.Combine(hostingEnvironment.ContentRootPath, "..", "..", "modules", "basic", "Good.Framework.Application"));
                 });
             }
         }

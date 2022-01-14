@@ -252,14 +252,7 @@ paket-files/
 *.sln.iml
 
 # Framework
-src/Good.Framework.Web/Logs/*
-src/Good.Framework.Web.Host/Logs/*
-src/Good.Framework.IdentityServer/Logs/*
-src/Good.Framework.HttpApi.Host/Logs/*
-src/Good.Framework.HttpApi.Host/Logs/*
-src/Good.Framework.DbMigrator/Logs/*
-src/Good.Framework.Blazor.Server/Logs/*
-src/Good.Framework.Blazor.Server.Tiered/Logs/*
+**/Logs/*
 
 # CodeRush
 .cr
