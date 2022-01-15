@@ -1,7 +1,7 @@
-﻿using Good.Framework.EntityFrameworkCore;
+﻿using Good.Framework.Abp.UI.Navigation.VueVbenAdmin;
+using Good.Framework.EntityFrameworkCore;
 using Good.Framework.Platform;
 using Good.Framework.Platform.EntityFrameworkCore;
-using Good.Framework.Abp.UI.Navigation.VueVbenAdmin;
 using Volo.Abp.Autofac;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Modularity;

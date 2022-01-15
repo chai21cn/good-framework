@@ -1,19 +1,20 @@
+using Good.Framework.DbMigrator.Domain;
 using Good.Framework.Platform.Datas;
 using Good.Framework.Platform.Layouts;
 using Good.Framework.Platform.Menus;
-using Good.Framework.Platform.Migrators;
 using Good.Framework.Platform.Versions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Modularity;
-using System.Linq;
 
 namespace Good.Framework.Platform.EntityFrameworkCore
 {
     [DependsOn(
         typeof(PlatformDomainModule),
-        typeof(AbpEntityFrameworkCoreModule))]
+        typeof(AbpEntityFrameworkCoreModule),
+        typeof(FrameworkDbMigratorDomainModule)
+        )]
     public class PlatformEntityFrameworkCoreModule : AbpModule
     {
         public override void PreConfigureServices(ServiceConfigurationContext context)

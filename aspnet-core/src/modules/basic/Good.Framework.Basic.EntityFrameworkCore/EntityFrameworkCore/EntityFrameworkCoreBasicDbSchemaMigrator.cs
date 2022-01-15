@@ -1,18 +1,19 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using Good.Framework.DbMigrator.Domain.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Good.Framework.Data;
+using System;
+using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;
 
 namespace Good.Framework.EntityFrameworkCore
 {
-    public class EntityFrameworkCoreFrameworkDbSchemaMigrator
+    [ExposeServices(typeof(IFrameworkDbSchemaMigrator))]
+    public class EntityFrameworkCoreBasicDbSchemaMigrator
         : IFrameworkDbSchemaMigrator, ITransientDependency
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public EntityFrameworkCoreFrameworkDbSchemaMigrator(
+        public EntityFrameworkCoreBasicDbSchemaMigrator(
             IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;

@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;
 
-namespace Good.Framework.Platform.Migrators
+namespace Good.Framework.DbMigrator.Domain.Data
 {
     /* This is used if database provider does't define
-     * IPlatformDbSchemaMigrator implementation.
+     * IFrameworkDbSchemaMigrator implementation.
      */
-    public class NullPlatformDbSchemaMigrator : IPlatformDbSchemaMigrator, ITransientDependency
+    public class NullFrameworkDbSchemaMigrator : IFrameworkDbSchemaMigrator, ITransientDependency
     {
         public Task MigrateAsync()
         {

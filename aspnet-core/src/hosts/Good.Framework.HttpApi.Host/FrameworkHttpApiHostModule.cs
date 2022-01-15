@@ -124,7 +124,7 @@ namespace Good.Framework
                 {
                     options.Authority = configuration["AuthServer:Authority"];
                     options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
-                    options.Audience = "Good.Framework";
+                    options.Audience = "Framework";
                     options.BackchannelHttpHandler = new HttpClientHandler
                     {
                         ServerCertificateCustomValidationCallback =
@@ -139,11 +139,11 @@ namespace Good.Framework
                 configuration["AuthServer:Authority"],
                 new Dictionary<string, string>
                 {
-                    {"Good.Framework", "Good.Framework API"}
+                    {"Framework", "Framework API"}
                 },
                 options =>
                 {
-                    options.SwaggerDoc("v1", new OpenApiInfo {Title = "Good.Framework API", Version = "v1"});
+                    options.SwaggerDoc("v1", new OpenApiInfo {Title = "Framework API", Version = "v1"});
                     options.DocInclusionPredicate((docName, description) => true);
                     options.CustomSchemaIds(type => type.FullName);
                 });

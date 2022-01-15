@@ -13,7 +13,7 @@ using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.TenantManagement;
 
-namespace Good.Framework.Data
+namespace Good.Framework.DbMigrator.Domain.Data
 {
     public class FrameworkDbMigrationService : ITransientDependency
     {

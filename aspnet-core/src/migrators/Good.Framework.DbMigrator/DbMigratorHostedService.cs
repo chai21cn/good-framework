@@ -1,5 +1,4 @@
-﻿using Good.Framework.Data;
-using Good.Framework.Platform.Migrators;
+﻿using Good.Framework.DbMigrator.Domain.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -35,11 +34,6 @@ namespace Good.Framework.DbMigrator
                 await application
                     .ServiceProvider
                     .GetRequiredService<FrameworkDbMigrationService>()
-                    .MigrateAsync();
-
-                await application
-                    .ServiceProvider
-                    .GetRequiredService<PlatformDbMigrationService>()
                     .MigrateAsync();
 
                 application.Shutdown();

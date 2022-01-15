@@ -8,6 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\migrators\Good.Framework.DbMigrator.Domain\Good.Framework.DbMigrator.Domain.csproj" />
 		<ProjectReference Include="..\Good.Framework.Platform.Domain\Good.Framework.Platform.Domain.csproj" />
 		<PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="5.1.1" />
 	</ItemGroup>
@@ -17,6 +18,10 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 			<PrivateAssets>compile; build; native; contentfiles; analyzers; buildtransitive</PrivateAssets>
 		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Migrations\" />
 	</ItemGroup>
 
 </Project>

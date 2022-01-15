@@ -61,6 +61,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Good.Framework.Platform.Ent
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Good.Framework.Platform.HttpApi", "src\modules\platform\Good.Framework.Platform.HttpApi\Good.Framework.Platform.HttpApi.csproj", "{0172AC66-9245-41E8-88D8-0AAD3ABD0807}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Good.Framework.DbMigrator.Domain", "src\migrators\Good.Framework.DbMigrator.Domain\Good.Framework.DbMigrator.Domain.csproj", "{EE69561D-97B6-4393-96F2-9D73CC827751}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -155,6 +157,10 @@ Global
 		{0172AC66-9245-41E8-88D8-0AAD3ABD0807}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0172AC66-9245-41E8-88D8-0AAD3ABD0807}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0172AC66-9245-41E8-88D8-0AAD3ABD0807}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE69561D-97B6-4393-96F2-9D73CC827751}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE69561D-97B6-4393-96F2-9D73CC827751}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE69561D-97B6-4393-96F2-9D73CC827751}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE69561D-97B6-4393-96F2-9D73CC827751}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -185,6 +191,7 @@ Global
 		{A76768C3-B498-4823-9913-BBB89F5FFDA3} = {AC0D8047-B635-4661-BBF5-176D61A34566}
 		{AED47686-10F3-4837-BDDC-BBF4BBD70D9E} = {AC0D8047-B635-4661-BBF5-176D61A34566}
 		{0172AC66-9245-41E8-88D8-0AAD3ABD0807} = {AC0D8047-B635-4661-BBF5-176D61A34566}
+		{EE69561D-97B6-4393-96F2-9D73CC827751} = {3BB1D479-0768-4806-8E77-D6FC50F27904}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28315BFD-90E7-4E14-A2EA-F3D23AF4126F}

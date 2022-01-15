@@ -34,6 +34,7 @@
     <ProjectReference Include="..\..\modules\platform\Good.Framework.Abp.UI.Navigation.VueVbenAdmin\Good.Framework.Abp.UI.Navigation.VueVbenAdmin.csproj" />
     <ProjectReference Include="..\..\modules\platform\Good.Framework.Platform.Application.Contracts\Good.Framework.Platform.Application.Contracts.csproj" />
     <ProjectReference Include="..\..\modules\platform\Good.Framework.Platform.EntityFrameworkCore\Good.Framework.Platform.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Good.Framework.DbMigrator.Domain\Good.Framework.DbMigrator.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

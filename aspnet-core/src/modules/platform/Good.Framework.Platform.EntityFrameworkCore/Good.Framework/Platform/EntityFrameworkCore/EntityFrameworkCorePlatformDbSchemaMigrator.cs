@@ -1,4 +1,4 @@
-﻿using Good.Framework.Platform.Migrators;
+﻿using Good.Framework.DbMigrator.Domain.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -7,8 +7,9 @@ using Volo.Abp.DependencyInjection;
 
 namespace Good.Framework.Platform.EntityFrameworkCore
 {
+    [ExposeServices(typeof(IFrameworkDbSchemaMigrator))]
     public class EntityFrameworkCorePlatformDbSchemaMigrator
-        : IPlatformDbSchemaMigrator, ITransientDependency
+        : IFrameworkDbSchemaMigrator, ITransientDependency
     {
         private readonly IServiceProvider _serviceProvider;
 

@@ -13,15 +13,15 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Migrations
 {
     [DbContext(typeof(PlatformDbContext))]
-    [Migration("20220114064332_Initial")]
-    partial class Initial
+    [Migration("20220115081031_Initialize-Platform")]
+    partial class InitializePlatform
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.SqlServer)
-                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("ProductVersion", "6.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
