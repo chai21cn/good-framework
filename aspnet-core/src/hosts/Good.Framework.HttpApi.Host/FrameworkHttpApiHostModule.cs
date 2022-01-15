@@ -98,13 +98,13 @@ namespace Good.Framework
                 Configure<AbpVirtualFileSystemOptions>(options =>
                 {
                     options.FileSets.ReplaceEmbeddedByPhysical<FrameworkDomainSharedModule>(
-                        Path.Combine(hostingEnvironment.ContentRootPath, "..", "..", "modules", "basic", "Good.Framework.Domain.Shared"));
+                        Path.Combine(hostingEnvironment.ContentRootPath, "..", "..", "modules", "basic", "Good.Framework.Basic.Domain.Shared"));
                     options.FileSets.ReplaceEmbeddedByPhysical<FrameworkDomainModule>(
-                        Path.Combine(hostingEnvironment.ContentRootPath, "..", "..", "modules", "basic", "Good.Framework.Domain"));
+                        Path.Combine(hostingEnvironment.ContentRootPath, "..", "..", "modules", "basic", "Good.Framework.Basic.Domain"));
                     options.FileSets.ReplaceEmbeddedByPhysical<FrameworkDomainModule>(
-                        Path.Combine(hostingEnvironment.ContentRootPath, "..", "..", "modules", "basic", "Good.Framework.Application.Contracts"));
+                        Path.Combine(hostingEnvironment.ContentRootPath, "..", "..", "modules", "basic", "Good.Framework.Basic.Application.Contracts"));
                     options.FileSets.ReplaceEmbeddedByPhysical<FrameworkDomainModule>(
-                        Path.Combine(hostingEnvironment.ContentRootPath, "..", "..", "modules", "basic", "Good.Framework.Application"));
+                        Path.Combine(hostingEnvironment.ContentRootPath, "..", "..", "modules", "basic", "Good.Framework.Basic.Application"));
                 });
             }
         }
@@ -124,7 +124,7 @@ namespace Good.Framework
                 {
                     options.Authority = configuration["AuthServer:Authority"];
                     options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
-                    options.Audience = "Framework";
+                    options.Audience = "Good.Framework";
                     options.BackchannelHttpHandler = new HttpClientHandler
                     {
                         ServerCertificateCustomValidationCallback =
@@ -139,11 +139,11 @@ namespace Good.Framework
                 configuration["AuthServer:Authority"],
                 new Dictionary<string, string>
                 {
-                    {"Framework", "Framework API"}
+                    {"Good.Framework", "Good.Framework API"}
                 },
                 options =>
                 {
-                    options.SwaggerDoc("v1", new OpenApiInfo {Title = "Framework API", Version = "v1"});
+                    options.SwaggerDoc("v1", new OpenApiInfo {Title = "Good.Framework API", Version = "v1"});
                     options.DocInclusionPredicate((docName, description) => true);
                     options.CustomSchemaIds(type => type.FullName);
                 });
@@ -153,24 +153,24 @@ namespace Good.Framework
         {
             Configure<AbpLocalizationOptions>(options =>
             {
-                options.Languages.Add(new LanguageInfo("ar", "ar", "العربية"));
-                options.Languages.Add(new LanguageInfo("cs", "cs", "Čeština"));
-                options.Languages.Add(new LanguageInfo("en", "en", "English"));
-                options.Languages.Add(new LanguageInfo("en-GB", "en-GB", "English (UK)"));
-                options.Languages.Add(new LanguageInfo("fi", "fi", "Finnish"));
-                options.Languages.Add(new LanguageInfo("fr", "fr", "Français"));
-                options.Languages.Add(new LanguageInfo("hi", "hi", "Hindi", "in"));
-                options.Languages.Add(new LanguageInfo("is", "is", "Icelandic", "is"));
-                options.Languages.Add(new LanguageInfo("it", "it", "Italiano", "it"));
-                options.Languages.Add(new LanguageInfo("hu", "hu", "Magyar"));
-                options.Languages.Add(new LanguageInfo("pt-BR", "pt-BR", "Português"));
-                options.Languages.Add(new LanguageInfo("ro-RO", "ro-RO", "Română"));
-                options.Languages.Add(new LanguageInfo("ru", "ru", "Русский"));
-                options.Languages.Add(new LanguageInfo("sk", "sk", "Slovak"));
-                options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe"));
+                //options.Languages.Add(new LanguageInfo("ar", "ar", "العربية"));
+                //options.Languages.Add(new LanguageInfo("cs", "cs", "Čeština"));
+                //options.Languages.Add(new LanguageInfo("en", "en", "English"));
+                //options.Languages.Add(new LanguageInfo("en-GB", "en-GB", "English (UK)"));
+                //options.Languages.Add(new LanguageInfo("fi", "fi", "Finnish"));
+                //options.Languages.Add(new LanguageInfo("fr", "fr", "Français"));
+                //options.Languages.Add(new LanguageInfo("hi", "hi", "Hindi", "in"));
+                //options.Languages.Add(new LanguageInfo("is", "is", "Icelandic", "is"));
+                //options.Languages.Add(new LanguageInfo("it", "it", "Italiano", "it"));
+                //options.Languages.Add(new LanguageInfo("hu", "hu", "Magyar"));
+                //options.Languages.Add(new LanguageInfo("pt-BR", "pt-BR", "Português"));
+                //options.Languages.Add(new LanguageInfo("ro-RO", "ro-RO", "Română"));
+                //options.Languages.Add(new LanguageInfo("ru", "ru", "Русский"));
+                //options.Languages.Add(new LanguageInfo("sk", "sk", "Slovak"));
+                //options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe"));
                 options.Languages.Add(new LanguageInfo("zh-Hans", "zh-Hans", "简体中文"));
-                options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
-                options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch", "de"));
+                //options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
+                //options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch", "de"));
                 options.Languages.Add(new LanguageInfo("es", "es", "Español", "es"));
             });
         }
