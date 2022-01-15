@@ -78,3 +78,59 @@ export function checkStatus(
     }
   }
 }
+
+export function checkResponse(response: any): void {
+  if (!response.data) {
+    // 都没捕获到则提示默认错误信息
+    const { t } = useI18n();
+    checkStatus(response.status, t('sys.api.apiRequestFailed'));
+    return;
+  }
+
+  let errorJson = response.data.error;
+
+  // 会话超时
+  if (response.status === 401) {
+    const userStore = useUserStoreWithOut();
+    userStore.setToken(undefined);
+    userStore.setSessionTimeout(true);
+    return;
+  }
+
+  // abp框架抛出异常信息
+  if (response.headers['_abperrorformat'] === 'true') {
+    if (errorJson === undefined && response.data.type === 'application/json') {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        errorJson = JSON.parse(e.target?.result as string);
+        console.log(errorJson);
+        error(errorJson.error.message);
+      };
+      reader.readAsText(response.data);
+    } else {
+      let errorMessage = errorJson.message;
+      if (errorJson.validationErrors) {
+        errorMessage += errorJson.validationErrors.map((v) => v.message).join('\n');
+      }
+      error(errorMessage);
+    }
+    return;
+  }
+
+  // oauth错误信息
+  if (response.data.error_description) {
+    error(response.data.error_description);
+    return;
+  }
+
+  // 其他错误
+  if (response.data.error.details) {
+    error(response.data.error.details);
+    return;
+  }
+
+  if (response.data.error.message) {
+    error(response.data.error.message);
+    return;
+  }
+}

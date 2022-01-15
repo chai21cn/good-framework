@@ -80,6 +80,10 @@ export default {
     registerButton: 'Sign up',
     rememberMe: 'Remember me',
     forgetPassword: 'Forget Password?',
+    passwordLogin: 'User password',
+    phoneLogin: 'Mobile',
+    wechatLogin: 'Wechat',
+    ssoLogin: 'Authentication center',
     otherSignIn: 'Sign in with',
 
     // notify
@@ -100,5 +104,10 @@ export default {
     email: 'Email',
     smsCode: 'SMS code',
     mobile: 'Mobile',
+  },
+  abp: {
+    remoteServiceNotFound: 'Remote Service {name} not found!',
+    controllerNotFound: 'Controller {name} not found!',
+    actionNotFound: 'Action {name} not found!',
   },
 };

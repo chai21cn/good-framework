@@ -8,7 +8,7 @@ export function useTableFooter(
   propsRef: ComputedRef<BasicTableProps>,
   scrollRef: ComputedRef<{
     x: string | number | true;
-    y: string | number | null;
+    y: Nullable<number>;
     scrollToFirstRowOnChange: boolean;
   }>,
   tableElRef: Ref<ComponentRef>,

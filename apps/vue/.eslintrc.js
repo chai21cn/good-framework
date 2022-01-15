@@ -55,6 +55,8 @@ module.exports = defineConfig({
     'space-before-function-paren': 'off',
 
     'vue/attributes-order': 'off',
+    'vue/v-on-event-hyphenation': 'off',
+    'vue/multi-word-component-names': 'off',
     'vue/one-component-per-file': 'off',
     'vue/html-closing-bracket-newline': 'off',
     'vue/max-attributes-per-line': 'off',
@@ -62,7 +64,8 @@ module.exports = defineConfig({
     'vue/singleline-html-element-content-newline': 'off',
     'vue/attribute-hyphenation': 'off',
     'vue/require-default-prop': 'off',
-    'vue/require-explicit-emits': 'off',
+    'jest/no-commented-out-tests': 'warn',
+    'function-url-quotes': 'off',
     'vue/html-self-closing': [
       'error',
       {
@@ -75,6 +78,5 @@ module.exports = defineConfig({
         math: 'always',
       },
     ],
-    'vue/multi-word-component-names': 'off',
   },
 });

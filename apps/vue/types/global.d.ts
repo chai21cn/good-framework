@@ -26,6 +26,13 @@ declare global {
   declare type PropType<T> = VuePropType<T>;
   declare type VueNode = VNodeChild | JSX.Element;
 
+  declare type NameValue<T> = {
+    name: string;
+    value: T;
+  };
+
+  declare type NameValue = NameValue<string>;
+
   export type Writable<T> = {
     -readonly [P in keyof T]: T[P];
   };
@@ -71,6 +78,9 @@ declare global {
     VITE_LEGACY: boolean;
     VITE_USE_IMAGEMIN: boolean;
     VITE_GENERATE_UI: string;
+    VITE_GLOB_CLIENT_ID: string;
+    VITE_GLOB_CLIENT_SECRET: string;
+    VITE_GLOB_MULTITENANCY_KEY: string;
   }
 
   declare function parseInt(s: string | number, radix?: number): number;

@@ -6,22 +6,28 @@
     :rules="getFormRules"
     ref="formRef"
     v-show="getShow"
+    colon
+    labelAlign="left"
     @keypress.enter="handleLogin"
   >
-    <FormItem name="account" class="enter-x">
-      <Input
+    <FormItem>
+      <MultiTenancyBox />
+    </FormItem>
+    <FormItem name="userName" class="enter-x" :label="t('AbpAccount.DisplayName:UserName')">
+      <BInput
         size="large"
-        v-model:value="formData.account"
-        :placeholder="t('sys.login.userName')"
+        v-model:value="formData.userName"
+        :placeholder="t('AbpAccount.DisplayName:UserName')"
         class="fix-auto-fill"
       />
     </FormItem>
-    <FormItem name="password" class="enter-x">
+    <FormItem name="password" class="enter-x" :label="t('AbpAccount.DisplayName:Password')">
       <InputPassword
         size="large"
         visibilityToggle
+        autocomplete="off"
         v-model:value="formData.password"
-        :placeholder="t('sys.login.password')"
+        :placeholder="t('AbpAccount.DisplayName:Password')"
       />
     </FormItem>
 
@@ -48,24 +54,20 @@
       <Button type="primary" size="large" block @click="handleLogin" :loading="loading">
         {{ t('sys.login.loginButton') }}
       </Button>
-      <!-- <Button size="large" class="mt-4 enter-x" block @click="handleRegister">
-        {{ t('sys.login.registerButton') }}
-      </Button> -->
     </FormItem>
-    <ARow class="enter-x">
-      <ACol :md="8" :xs="24">
+    <!-- <ARow class="enter-x">
+      <ACol :md="12" :xs="24">
         <Button block @click="setLoginState(LoginStateEnum.MOBILE)">
           {{ t('sys.login.mobileSignInFormTitle') }}
         </Button>
       </ACol>
-      <ACol :md="8" :xs="24" class="!my-2 !md:my-0 xs:mx-0 md:mx-2">
-        <Button block @click="setLoginState(LoginStateEnum.QR_CODE)">
-          {{ t('sys.login.qrSignInFormTitle') }}
-        </Button>
-      </ACol>
-      <ACol :md="7" :xs="24">
-        <Button block @click="setLoginState(LoginStateEnum.REGISTER)">
-          {{ t('sys.login.registerButton') }}
+    </ARow> -->
+
+    <ARow class="enter-x" v-if="settingProvider.isTrue('Abp.Account.IsSelfRegistrationEnabled')">
+      <ACol :md="24" :xs="24">
+        <span>{{ t('AbpAccount.AreYouANewUser') }}</span>
+        <Button type="link" @click="setLoginState(LoginStateEnum.REGISTER)">
+          {{ t('AbpAccount.Register') }}
         </Button>
       </ACol>
     </ARow>
@@ -73,11 +75,28 @@
     <Divider class="enter-x">{{ t('sys.login.otherSignIn') }}</Divider>
 
     <div class="flex justify-evenly enter-x" :class="`${prefixCls}-sign-in-way`">
-      <GithubFilled />
-      <WechatFilled />
-      <AlipayCircleFilled />
-      <GoogleCircleFilled />
-      <TwitterCircleFilled />
+      <SvgIcon
+        v-if="getLoginState !== LoginStateEnum.SSO"
+        name="idsv4"
+        :style="{ cursor: 'pointer' }"
+        :size="22"
+        title="SSO"
+        @click="login"
+      />
+      <UserOutlined
+        v-if="getLoginState !== LoginStateEnum.LOGIN"
+        :title="t('sys.login.passwordLogin')"
+        @click="setLoginState(LoginStateEnum.LOGIN)"
+      />
+      <MobileOutlined
+        v-if="getLoginState !== LoginStateEnum.MOBILE"
+        :title="t('sys.login.phoneLogin')"
+        @click="setLoginState(LoginStateEnum.MOBILE)"
+      />
+      <WechatOutlined
+        v-if="getLoginState !== LoginStateEnum.WECHAT"
+        :title="t('sys.login.wechatLogin')"
+      />
     </div>
   </Form>
 </template>
@@ -85,21 +104,20 @@
   import { reactive, ref, unref, computed } from 'vue';
 
   import { Checkbox, Form, Input, Row, Col, Button, Divider } from 'ant-design-vue';
-  import {
-    GithubFilled,
-    WechatFilled,
-    AlipayCircleFilled,
-    GoogleCircleFilled,
-    TwitterCircleFilled,
-  } from '@ant-design/icons-vue';
+  import { MobileOutlined, WechatOutlined, UserOutlined } from '@ant-design/icons-vue';
+  import { SvgIcon } from '/@/components/Icon';
+  import { Input as BInput } from '/@/components/Input';
   import LoginFormTitle from './LoginFormTitle.vue';
+  import { MultiTenancyBox } from '/@/components/MultiTenancyBox';
 
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useMessage } from '/@/hooks/web/useMessage';
 
   import { useUserStore } from '/@/store/modules/user';
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
+  import { useOidc } from './useOidc';
   import { useDesign } from '/@/hooks/web/useDesign';
+  import { useSettings } from '/@/hooks/abp/useSettings';
   //import { onKeyStroke } from '@vueuse/core';
 
   const ACol = Col;
@@ -107,9 +125,11 @@
   const FormItem = Form.Item;
   const InputPassword = Input.Password;
   const { t } = useI18n();
-  const { notification, createErrorModal } = useMessage();
+  const { notification } = useMessage();
   const { prefixCls } = useDesign('login');
+  const { settingProvider } = useSettings();
   const userStore = useUserStore();
+  const { login } = useOidc();
 
   const { setLoginState, getLoginState } = useLoginState();
   const { getFormRules } = useFormRules();
@@ -119,8 +139,8 @@
   const rememberMe = ref(false);
 
   const formData = reactive({
-    account: 'admin',
-    password: '1q2w3E*',
+    userName: '',
+    password: '',
   });
 
   const { validForm } = useFormValid(formRef);
@@ -136,7 +156,7 @@
       loading.value = true;
       const userInfo = await userStore.login({
         password: data.password,
-        username: data.account,
+        username: data.userName,
         mode: 'none', //不要默认的错误提示
       });
       if (userInfo) {
@@ -148,12 +168,6 @@
           duration: 3,
         });
       }
-    } catch (error) {
-      createErrorModal({
-        title: t('sys.api.errorTip'),
-        content: (error as unknown as Error).message || t('sys.api.networkExceptionMsg'),
-        getContainer: () => document.body.querySelector(`.${prefixCls}`) || document.body,
-      });
     } finally {
       loading.value = false;
     }

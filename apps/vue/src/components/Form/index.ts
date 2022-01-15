@@ -1,4 +1,5 @@
 import BasicForm from './src/BasicForm.vue';
+import TabForm from './src/TabForm.vue';
 
 export * from './src/types/form';
 export * from './src/types/formItem';
@@ -12,4 +13,4 @@ export { default as ApiTreeSelect } from './src/components/ApiTreeSelect.vue';
 export { default as ApiRadioGroup } from './src/components/ApiRadioGroup.vue';
 export { default as ApiCascader } from './src/components/ApiCascader.vue';
 
-export { BasicForm };
+export { BasicForm, TabForm };

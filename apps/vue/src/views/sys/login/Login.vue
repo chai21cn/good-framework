@@ -53,6 +53,7 @@
             <LoginForm />
             <ForgetPasswordForm />
             <RegisterForm />
+            <MobileRegisterForm />
             <MobileForm />
             <QrCodeForm />
           </div>
@@ -62,7 +63,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { computed } from 'vue';
+  import { computed, onMounted } from 'vue';
   import { AppLogo } from '/@/components/Application';
   import { AppLocalePicker, AppDarkModeToggle } from '/@/components/Application';
   import LoginForm from './LoginForm.vue';
@@ -70,10 +71,12 @@
   import RegisterForm from './RegisterForm.vue';
   import MobileForm from './MobileForm.vue';
   import QrCodeForm from './QrCodeForm.vue';
+  import MobileRegisterForm from './MobileRegisterForm.vue';
   import { useGlobSetting } from '/@/hooks/setting';
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useLocaleStore } from '/@/store/modules/locale';
+  import { useLoginState, LoginStateEnum } from './useLogin';
 
   defineProps({
     sessionTimeout: {
@@ -84,9 +87,12 @@
   const globSetting = useGlobSetting();
   const { prefixCls } = useDesign('login');
   const { t } = useI18n();
+  const { setLoginState } = useLoginState();
   const localeStore = useLocaleStore();
   const showLocale = localeStore.getShowPicker;
   const title = computed(() => globSetting?.title ?? '');
+
+  onMounted(() => setLoginState(LoginStateEnum.LOGIN));
 </script>
 <style lang="less">
   @prefix-cls: ~'@{namespace}-login';
@@ -99,7 +105,7 @@
       background-color: @dark-bg;
 
       &::before {
-        background-image: url(/@/assets/svg/login-bg-dark.svg);
+        background-image: url('/@/assets/svg/login-bg-dark.svg');
       }
 
       .ant-input,
@@ -145,7 +151,7 @@
       width: 100%;
       height: 100%;
       margin-left: -48%;
-      background-image: url(/@/assets/svg/login-bg.svg);
+      background-image: url('/@/assets/svg/login-bg.svg');
       background-position: 100%;
       background-repeat: no-repeat;
       background-size: auto 100%;

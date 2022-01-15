@@ -1,7 +1,6 @@
 <template>
   <div ref="wrapRef" :class="getWrapperClass">
     <BasicForm
-      ref="formRef"
       submitOnReset
       v-bind="getFormProps"
       v-if="getBindValues.useSearchForm"
@@ -26,7 +25,7 @@
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
 
-      <template #[`header-${column.dataIndex}`] v-for="(column, index) in columns" :key="index">
+      <template #[`header-${column.dataIndex}`] v-for="column in columns" :key="column.dataIndex">
         <HeaderCell :column="column" />
       </template>
     </Table>
@@ -44,6 +43,7 @@
   import { Table } from 'ant-design-vue';
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { PageWrapperFixedHeightKey } from '/@/components/Page';
+  import expandIcon from './components/ExpandIcon';
   import HeaderCell from './components/HeaderCell.vue';
   import { InnerHandlers } from './types/table';
 
@@ -53,7 +53,6 @@
   import { useLoading } from './hooks/useLoading';
   import { useRowSelection } from './hooks/useRowSelection';
   import { useTableScroll } from './hooks/useTableScroll';
-  import { useTableScrollTo } from './hooks/useScrollTo';
   import { useCustomRow } from './hooks/useCustomRow';
   import { useTableStyle } from './hooks/useTableStyle';
   import { useTableHeader } from './hooks/useTableHeader';
@@ -98,7 +97,6 @@
       const tableData = ref<Recordable[]>([]);
 
       const wrapRef = ref(null);
-      const formRef = ref(null);
       const innerPropsRef = ref<Partial<BasicTableProps>>();
 
       const { prefixCls } = useDesign('basic-table');
@@ -187,11 +185,7 @@
         getColumnsRef,
         getRowSelectionRef,
         getDataSourceRef,
-        wrapRef,
-        formRef,
       );
-
-      const { scrollTo } = useTableScrollTo(tableElRef, getDataSourceRef);
 
       const { customRow } = useCustomRow(getProps, {
         setSelectedRowKeys,
@@ -203,11 +197,7 @@
 
       const { getRowClassName } = useTableStyle(getProps, prefixCls);
 
-      const { getExpandOption, expandAll, expandRows, collapseAll } = useTableExpand(
-        getProps,
-        tableData,
-        emit,
-      );
+      const { getExpandOption, expandAll, collapseAll } = useTableExpand(getProps, tableData, emit);
 
       const handlers: InnerHandlers = {
         onColumnsChange: (data: ColumnChangeParam[]) => {
@@ -232,8 +222,10 @@
       const getBindValues = computed(() => {
         const dataSource = unref(getDataSourceRef);
         let propsData: Recordable = {
+          // ...(dataSource.length === 0 ? { getPopupContainer: () => document.body } : {}),
           ...attrs,
           customRow,
+          expandIcon: slots.expandIcon ? null : expandIcon(),
           ...unref(getProps),
           ...unref(getHeaderProps),
           scroll: unref(getScrollRef),
@@ -308,9 +300,7 @@
         getShowPagination,
         setCacheColumnsByField,
         expandAll,
-        expandRows,
         collapseAll,
-        scrollTo,
         getSize: () => {
           return unref(getBindValues).size as SizeType;
         },
@@ -322,7 +312,6 @@
       emit('register', tableAction, formActions);
 
       return {
-        formRef,
         tableElRef,
         getBindValues,
         getLoading,
@@ -357,7 +346,6 @@
 
   .@{prefix-cls} {
     max-width: 100%;
-    height: 100%;
 
     &-row__striped {
       td {

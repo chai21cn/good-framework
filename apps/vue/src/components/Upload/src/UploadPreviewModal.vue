@@ -2,7 +2,7 @@
   <BasicModal
     width="800px"
     :title="t('component.upload.preview')"
-    class="upload-preview-modal"
+    wrapClassName="upload-preview-modal"
     v-bind="$attrs"
     @register="register"
     :showOkBtn="false"
@@ -29,7 +29,6 @@
     setup(props, { emit }) {
       const [register, { closeModal }] = useModalInner();
       const { t } = useI18n();
-
       const fileListRef = ref<PreviewFileItem[]>([]);
       watch(
         () => props.value,
@@ -47,7 +46,6 @@
         },
         { immediate: true },
       );
-
       // 删除
       function handleRemove(record: PreviewFileItem) {
         const index = fileListRef.value.findIndex((item) => item.url === record.url);
@@ -60,7 +58,6 @@
           );
         }
       }
-
       // // 预览
       // function handlePreview(record: PreviewFileItem) {
       //   const { url = '' } = record;
@@ -68,13 +65,11 @@
       //     imageList: [url],
       //   });
       // }
-
       // 下载
       function handleDownload(record: PreviewFileItem) {
         const { url = '' } = record;
         downloadByUrl({ url });
       }
-
       return {
         t,
         register,

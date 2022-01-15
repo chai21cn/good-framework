@@ -14,6 +14,7 @@ import { configVisualizerConfig } from './visualizer';
 import { configThemePlugin } from './theme';
 import { configImageminPlugin } from './imagemin';
 import { configSvgIconsPlugin } from './svgSprite';
+import { configHmrPlugin } from './hmr';
 
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   const {
@@ -36,6 +37,9 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   // vite-plugin-windicss
   vitePlugins.push(windiCSS());
 
+  // TODO
+  !isBuild && vitePlugins.push(configHmrPlugin());
+
   // @vitejs/plugin-legacy
   VITE_LEGACY && isBuild && vitePlugins.push(legacy());
 
@@ -57,12 +61,12 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   // rollup-plugin-visualizer
   vitePlugins.push(configVisualizerConfig());
 
-  // vite-plugin-theme
+  //vite-plugin-theme
   vitePlugins.push(configThemePlugin(isBuild));
 
   // The following plugins only work in the production environment
   if (isBuild) {
-    // vite-plugin-imagemin
+    //vite-plugin-imagemin
     VITE_USE_IMAGEMIN && vitePlugins.push(configImageminPlugin());
 
     // rollup-plugin-gzip

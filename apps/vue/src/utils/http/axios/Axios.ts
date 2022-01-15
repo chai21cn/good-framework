@@ -1,5 +1,5 @@
 import type { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
-import type { RequestOptions, Result, UploadFileParams } from '/#/axios';
+import type { RequestOptions, UploadFileParams } from '/#/axios';
 import type { CreateAxiosOptions } from './axiosTransform';
 import axios from 'axios';
 import qs from 'qs';
@@ -80,8 +80,11 @@ export class VAxios {
     // Request interceptor configuration processing
     this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
       // If cancel repeat request is turned on, then cancel repeat request is prohibited
-      // @ts-ignore
-      const { ignoreCancelToken } = config.requestOptions;
+      const {
+        // @ts-ignore
+        headers: { ignoreCancelToken },
+      } = config;
+
       const ignoreCancel =
         ignoreCancelToken !== undefined
           ? ignoreCancelToken
@@ -141,7 +144,7 @@ export class VAxios {
       });
     }
 
-    return this.axiosInstance.request<T>({
+    return this.axiosInstance.request<T, AxiosResponse<any>>({
       ...config,
       method: 'POST',
       data: formData,
@@ -206,8 +209,8 @@ export class VAxios {
 
     return new Promise((resolve, reject) => {
       this.axiosInstance
-        .request<any, AxiosResponse<Result>>(conf)
-        .then((res: AxiosResponse<Result>) => {
+        .request<any, AxiosResponse<any>>(conf)
+        .then((res: AxiosResponse<any>) => {
           if (transformRequestHook && isFunction(transformRequestHook)) {
             try {
               const ret = transformRequestHook(res, opt);

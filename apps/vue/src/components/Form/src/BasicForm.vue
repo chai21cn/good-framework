@@ -58,7 +58,6 @@
   import { createFormContext } from './hooks/useFormContext';
   import { useAutoFocus } from './hooks/useAutoFocus';
   import { useModalContext } from '/@/components/Modal';
-  import { useDebounceFn } from '@vueuse/core';
 
   import { basicProps } from './props';
   import { useDesign } from '/@/hooks/web/useDesign';
@@ -123,7 +122,7 @@
             if (!Array.isArray(defaultValue)) {
               schema.defaultValue = dateUtil(defaultValue);
             } else {
-              const def: any[] = [];
+              const def: moment.Moment[] = [];
               defaultValue.forEach((item) => {
                 def.push(dateUtil(item));
               });
@@ -224,14 +223,6 @@
             isInitedDefaultRef.value = true;
           }
         },
-      );
-
-      watch(
-        () => formModel,
-        useDebounceFn(() => {
-          unref(getProps).submitOnChange && handleSubmit();
-        }, 300),
-        { deep: true },
       );
 
       async function setProps(formProps: Partial<FormProps>): Promise<void> {

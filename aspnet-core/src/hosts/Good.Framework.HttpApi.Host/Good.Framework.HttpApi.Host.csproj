@@ -25,6 +25,8 @@
     <ProjectReference Include="..\..\modules\basic\Good.Framework.Basic.Application\Good.Framework.Basic.Application.csproj" />
     <ProjectReference Include="..\..\modules\basic\Good.Framework.Basic.EntityFrameworkCore\Good.Framework.Basic.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\modules\basic\Good.Framework.Basic.HttpApi\Good.Framework.Basic.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\common\Good.Framework.Abp.Localization.Dynamic\Good.Framework.Abp.Localization.Dynamic.csproj" />
+    <ProjectReference Include="..\..\modules\localization\Good.Framework.Abp.Localization.CultureMap\Good.Framework.Abp.Localization.CultureMap.csproj" />
     <ProjectReference Include="..\..\modules\platform\Good.Framework.Platform.Application\Good.Framework.Platform.Application.csproj" />
     <ProjectReference Include="..\..\modules\platform\Good.Framework.Platform.EntityFrameworkCore\Good.Framework.Platform.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\modules\platform\Good.Framework.Platform.HttpApi\Good.Framework.Platform.HttpApi.csproj" />

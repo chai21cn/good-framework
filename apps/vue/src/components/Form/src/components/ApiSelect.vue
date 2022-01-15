@@ -1,6 +1,6 @@
 <template>
   <Select
-    @dropdown-visible-change="handleFetch"
+    @dropdownVisibleChange="handleFetch"
     v-bind="$attrs"
     @change="handleChange"
     :options="getOptions"
@@ -57,7 +57,6 @@
       labelField: propTypes.string.def('label'),
       valueField: propTypes.string.def('value'),
       immediate: propTypes.bool.def(true),
-      alwaysLoad: propTypes.bool.def(false),
     },
     emits: ['options-change', 'change'],
     setup(props, { emit }) {
@@ -88,7 +87,7 @@
       });
 
       watchEffect(() => {
-        props.immediate && !props.alwaysLoad && fetch();
+        props.immediate && fetch();
       });
 
       watch(
@@ -122,14 +121,10 @@
         }
       }
 
-      async function handleFetch(visible) {
-        if (visible) {
-          if (props.alwaysLoad) {
-            await fetch();
-          } else if (!props.immediate && unref(isFirstLoad)) {
-            await fetch();
-            isFirstLoad.value = false;
-          }
+      async function handleFetch() {
+        if (!props.immediate && unref(isFirstLoad)) {
+          await fetch();
+          isFirstLoad.value = false;
         }
       }
 

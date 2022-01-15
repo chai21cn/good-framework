@@ -9,12 +9,27 @@ import type { AppRouteModule } from '/@/router/types';
 // http:ip:port/main-out
 export const mainOutRoutes: AppRouteModule[] = [
   {
-    path: '/main-out',
-    name: 'MainOut',
-    component: () => import('/@/views/demo/main-out/index.vue'),
+    path: '/signin-callback',
+    name: 'signin-callback',
+    component: () => import('/@/views/sys/login/OidcSignInCallback.vue'),
     meta: {
-      title: 'MainOut',
+      title: 'signin-callbackk',
       ignoreAuth: true,
+      hideMenu: true,
+      hideTab: true,
+      hideBreadcrumb: true,
+    },
+  },
+  {
+    path: '/signout-callback',
+    name: 'signout-callback',
+    component: () => import('../../views/sys/login/OidcSignOutCallback.vue'),
+    meta: {
+      title: 'signout-callback',
+      ignoreAuth: true,
+      hideMenu: true,
+      hideTab: true,
+      hideBreadcrumb: true,
     },
   },
 ];

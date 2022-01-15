@@ -9,7 +9,7 @@
     :closeFunc="handleCloseFunc"
     :maskClosable="false"
     :keyboard="false"
-    class="upload-modal"
+    wrapClassName="upload-modal"
     :okButtonProps="getOkButtonProps"
     :cancelButtonProps="{ disabled: isUploadingRef }"
   >
@@ -31,7 +31,6 @@
         :accept="getStringAccept"
         :multiple="multiple"
         :before-upload="beforeUpload"
-        :show-upload-list="false"
         class="upload-modal-toolbar__btn"
       >
         <a-button type="primary">
@@ -55,7 +54,7 @@
   import { basicProps } from './props';
   import { createTableColumns, createActionColumn } from './data';
   // utils
-  import { checkImgType, getBase64WithFile } from './helper';
+  import { checkFileType, checkImgType, getBase64WithFile } from './helper';
   import { buildUUID } from '/@/utils/uuid';
   import { isFunction } from '/@/utils/is';
   import { warn } from '/@/utils/log';
@@ -85,22 +84,19 @@
       const { t } = useI18n();
       const [register, { closeModal }] = useModalInner();
 
-      const { getStringAccept, getHelpText } = useUploadType({
+      const { getAccept, getStringAccept, getHelpText } = useUploadType({
         acceptRef: accept,
         helpTextRef: helpText,
         maxNumberRef: maxNumber,
         maxSizeRef: maxSize,
       });
-
       const { createMessage } = useMessage();
-
       const getIsSelectFile = computed(() => {
         return (
           fileListRef.value.length > 0 &&
           !fileListRef.value.every((item) => item.status === UploadResultStatus.SUCCESS)
         );
       });
-
       const getOkButtonProps = computed(() => {
         const someSuccess = fileListRef.value.some(
           (item) => item.status === UploadResultStatus.SUCCESS,
@@ -109,7 +105,6 @@
           disabled: isUploadingRef.value || fileListRef.value.length === 0 || !someSuccess,
         };
       });
-
       const getUploadBtnText = computed(() => {
         const someError = fileListRef.value.some(
           (item) => item.status === UploadResultStatus.ERROR,
@@ -120,17 +115,22 @@
           ? t('component.upload.reUploadFailed')
           : t('component.upload.startUpload');
       });
-
       // 上传前校验
       function beforeUpload(file: File) {
         const { size, name } = file;
         const { maxSize } = props;
+        const accept = unref(getAccept);
         // 设置最大值，则判断
+        console.log(file.size);
         if (maxSize && file.size / 1024 / 1024 >= maxSize) {
           createMessage.error(t('component.upload.maxSizeMultiple', [maxSize]));
           return false;
         }
-
+        // 设置类型,则判断
+        if (accept.length > 0 && !checkFileType(file, accept)) {
+          createMessage.error!(t('component.upload.acceptUpload', [accept.join(',')]));
+          return false;
+        }
         const commonItem = {
           uuid: buildUUID(),
           file,
@@ -164,7 +164,6 @@
         index !== -1 && fileListRef.value.splice(index, 1);
         emit('delete', record);
       }
-
       // 预览
       // function handlePreview(record: FileItem) {
       //   const { thumbUrl = '' } = record;
@@ -172,7 +171,6 @@
       //     imageList: [thumbUrl],
       //   });
       // }
-
       async function uploadApiByItem(item: FileItem) {
         const { api } = props;
         if (!api || !isFunction(api)) {
@@ -209,7 +207,6 @@
           };
         }
       }
-
       // 点击开始上传
       async function handleStartUpload() {
         const { maxNumber } = props;
@@ -235,11 +232,9 @@
           throw e;
         }
       }
-
       //   点击保存
       function handleOk() {
         const { maxNumber } = props;
-
         if (fileListRef.value.length > maxNumber) {
           return createMessage.warning(t('component.upload.maxNumber', [maxNumber]));
         }
@@ -247,7 +242,6 @@
           return createMessage.warning(t('component.upload.saveWarn'));
         }
         const fileList: string[] = [];
-
         for (const item of fileListRef.value) {
           const { status, responseData } = item;
           if (status === UploadResultStatus.SUCCESS && responseData) {
@@ -262,7 +256,6 @@
         closeModal();
         emit('change', fileList);
       }
-
       // 点击关闭：则所有操作不保存，包括上传的
       async function handleCloseFunc() {
         if (!isUploadingRef.value) {
@@ -273,7 +266,6 @@
           return false;
         }
       }
-
       return {
         columns: createTableColumns() as any[],
         actionColumn: createActionColumn(handleRemove) as any,

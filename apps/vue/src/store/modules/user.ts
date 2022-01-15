@@ -5,17 +5,20 @@ import { RoleEnum } from '/@/enums/roleEnum';
 import { PageEnum } from '/@/enums/pageEnum';
 import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum';
 import { getAuthCache, setAuthCache } from '/@/utils/auth';
-import { GetUserInfoModel, LoginParams } from '/@/api/sys/model/userModel';
+import { GetUserInfoModel, LoginParams, LoginByPhoneParams } from '/@/api/sys/model/userModel';
 import { useAbpStoreWithOut } from './abp';
-import { doLogout, getUserInfo, loginApi } from '/@/api/sys/user';
+
+import { loginApi, loginPhoneApi, getUserInfo } from '/@/api/sys/user';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { router } from '/@/router';
 import { usePermissionStore } from '/@/store/modules/permission';
 import { RouteRecordRaw } from 'vue-router';
 import { PAGE_NOT_FOUND_ROUTE } from '/@/router/routes/basic';
-import { isArray } from '/@/utils/is';
 import { h } from 'vue';
+
+import { mgr } from '/@/utils/auth/oidc';
+import { formatUrl } from '/@/api/oss-management/private';
 
 interface UserState {
   userInfo: Nullable<GetUserInfoModel>;
@@ -23,6 +26,8 @@ interface UserState {
   roleList: RoleEnum[];
   sessionTimeout?: boolean;
   lastUpdateTime: number;
+  /** sso标记,用于后台退出 */
+  sso?: boolean;
 }
 
 export const useUserStore = defineStore({
@@ -40,6 +45,9 @@ export const useUserStore = defineStore({
     lastUpdateTime: 0,
   }),
   getters: {
+    getSso(): boolean {
+      return this.sso === true;
+    },
     getUserInfo(): GetUserInfoModel {
       return this.userInfo || getAuthCache<GetUserInfoModel>(USER_INFO_KEY) || {};
     },
@@ -57,6 +65,9 @@ export const useUserStore = defineStore({
     },
   },
   actions: {
+    setSso(sso: boolean) {
+      this.sso = sso;
+    },
     setToken(info: string | undefined) {
       this.token = info ? info : ''; // for null or undefined value
       setAuthCache(TOKEN_KEY, info);
@@ -94,12 +105,38 @@ export const useUserStore = defineStore({
         const { goHome = true, mode, ...loginParams } = params;
         const data = await loginApi(loginParams, mode);
         const { access_token } = data;
+        this.setSso(false);
         this.setToken(access_token);
         return this.afterLoginAction(goHome);
       } catch (error) {
         return Promise.reject(error);
       }
     },
+
+    async loginByPhone(
+      params: LoginByPhoneParams & {
+        goHome?: boolean;
+        mode?: ErrorMessageMode;
+      },
+    ): Promise<GetUserInfoModel | null> {
+      try {
+        const { goHome = true, mode, ...loginParams } = params;
+        const data = await loginPhoneApi(loginParams, mode);
+        const { access_token } = data;
+        this.setSso(false);
+        this.setToken(access_token);
+        return this.afterLoginAction(goHome);
+      } catch (error) {
+        return Promise.reject(error);
+      }
+    },
+
+    async oidcLogin(user: { access_token: string }) {
+      this.setSso(true);
+      this.setToken(user.access_token);
+      return this.afterLoginAction(true);
+    },
+
     async afterLoginAction(goHome?: boolean): Promise<GetUserInfoModel | null> {
       if (!this.getToken) return null;
       // get user info
@@ -154,7 +191,12 @@ export const useUserStore = defineStore({
       this.setToken(undefined);
       this.setSessionTimeout(false);
       this.setUserInfo({});
-      goLogin && router.push(PageEnum.BASE_LOGIN);
+      if (this.getSso === true) {
+        this.setSso(false);
+        mgr.signoutRedirect();
+      } else {
+        goLogin && router.push(PageEnum.BASE_LOGIN);
+      }
     },
 
     /**

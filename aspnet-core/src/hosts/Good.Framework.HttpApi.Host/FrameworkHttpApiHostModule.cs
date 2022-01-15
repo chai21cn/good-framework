@@ -24,6 +24,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
 using Volo.Abp.Localization;
+using Volo.Abp.Identity.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.UI.Navigation.Urls;
@@ -31,6 +32,7 @@ using Volo.Abp.VirtualFileSystem;
 using Good.Framework.Platform.HttpApi;
 using Good.Framework.Platform;
 using Good.Framework.Platform.EntityFrameworkCore;
+using Good.Framework.Abp.Localization.CultureMap;
 
 namespace Good.Framework
 {
@@ -101,10 +103,12 @@ namespace Good.Framework
                         Path.Combine(hostingEnvironment.ContentRootPath, "..", "..", "modules", "basic", "Good.Framework.Basic.Domain.Shared"));
                     options.FileSets.ReplaceEmbeddedByPhysical<FrameworkDomainModule>(
                         Path.Combine(hostingEnvironment.ContentRootPath, "..", "..", "modules", "basic", "Good.Framework.Basic.Domain"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<FrameworkDomainModule>(
+                    options.FileSets.ReplaceEmbeddedByPhysical<FrameworkApplicationContractsModule>(
                         Path.Combine(hostingEnvironment.ContentRootPath, "..", "..", "modules", "basic", "Good.Framework.Basic.Application.Contracts"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<FrameworkDomainModule>(
+                    options.FileSets.ReplaceEmbeddedByPhysical<FrameworkApplicationModule>(
                         Path.Combine(hostingEnvironment.ContentRootPath, "..", "..", "modules", "basic", "Good.Framework.Basic.Application"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<PlatformDomainSharedModule>(
+                        Path.Combine(hostingEnvironment.ContentRootPath, "..", "..", "modules", "platform", "Good.Framework.Platform.Domain.Shared"));
                 });
             }
         }
@@ -151,27 +155,45 @@ namespace Good.Framework
 
         private void ConfigureLocalization()
         {
+            // 支持本地化语言类型
             Configure<AbpLocalizationOptions>(options =>
             {
-                //options.Languages.Add(new LanguageInfo("ar", "ar", "العربية"));
-                //options.Languages.Add(new LanguageInfo("cs", "cs", "Čeština"));
-                //options.Languages.Add(new LanguageInfo("en", "en", "English"));
-                //options.Languages.Add(new LanguageInfo("en-GB", "en-GB", "English (UK)"));
-                //options.Languages.Add(new LanguageInfo("fi", "fi", "Finnish"));
-                //options.Languages.Add(new LanguageInfo("fr", "fr", "Français"));
-                //options.Languages.Add(new LanguageInfo("hi", "hi", "Hindi", "in"));
-                //options.Languages.Add(new LanguageInfo("is", "is", "Icelandic", "is"));
-                //options.Languages.Add(new LanguageInfo("it", "it", "Italiano", "it"));
-                //options.Languages.Add(new LanguageInfo("hu", "hu", "Magyar"));
-                //options.Languages.Add(new LanguageInfo("pt-BR", "pt-BR", "Português"));
-                //options.Languages.Add(new LanguageInfo("ro-RO", "ro-RO", "Română"));
-                //options.Languages.Add(new LanguageInfo("ru", "ru", "Русский"));
-                //options.Languages.Add(new LanguageInfo("sk", "sk", "Slovak"));
-                //options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe"));
                 options.Languages.Add(new LanguageInfo("zh-Hans", "zh-Hans", "简体中文"));
-                //options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
-                //options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch", "de"));
-                options.Languages.Add(new LanguageInfo("es", "es", "Español", "es"));
+                options.Languages.Add(new LanguageInfo("en", "en", "English"));
+
+                options.Resources
+                       .Get<IdentityResource>()
+                       .AddVirtualJson("/Localization/Resources");
+                options
+                    .AddLanguagesMapOrUpdate(
+                        "vue-admin-element-ui",
+                        new NameValue("zh-Hans", "zh"),
+                        new NameValue("en", "en"));
+
+                // vben admin 语言映射
+                options
+                    .AddLanguagesMapOrUpdate(
+                        "vben-admin-ui",
+                        new NameValue("zh_CN", "zh-Hans"));
+
+                options.Resources.AddDynamic();
+            });
+
+            Configure<AbpLocalizationCultureMapOptions>(options =>
+            {
+                var zhHansCultureMapInfo = new CultureMapInfo
+                {
+                    TargetCulture = "zh-Hans",
+                    SourceCultures = new string[] { "zh", "zh_CN", "zh-CN" }
+                };
+
+                options.CulturesMaps.Add(zhHansCultureMapInfo);
+                options.UiCulturesMaps.Add(zhHansCultureMapInfo);
+            });
+
+            Configure<RequestLocalizationOptions>(options =>
+            {
+                options.RequestCultureProviders.Insert(0, new AbpCultureMapRequestCultureProvider());
             });
         }
 
@@ -225,6 +247,8 @@ namespace Good.Framework
             {
                 app.UseMultiTenancy();
             }
+            // 本地化
+            app.UseMapRequestLocalization();
 
             app.UseUnitOfWork();
             app.UseIdentityServer();

@@ -2,10 +2,9 @@
  * @description: Request result set
  */
 export enum ResultEnum {
+  CODE = '0',
   SUCCESS = 0,
-  ERROR = 1,
-  TIMEOUT = 401,
-  TYPE = 'success',
+  MESSAGE = 'OK',
 }
 
 /**
@@ -19,7 +18,7 @@ export enum RequestEnum {
 }
 
 /**
- * @description:  contentType
+ * @description:  contentTyp
  */
 export enum ContentTypeEnum {
   // json

@@ -216,17 +216,25 @@ export function useColumns(
       const columnKeys = columns as string[];
       const newColumns: BasicColumn[] = [];
       cacheColumns.forEach((item) => {
-        newColumns.push({
-          ...item,
-          defaultHidden: !columnKeys.includes(item.dataIndex! || (item.key as string)),
-        });
+        if (columnKeys.includes(item.dataIndex! || (item.key as string))) {
+          newColumns.push({
+            ...item,
+            defaultHidden: false,
+          });
+        } else {
+          newColumns.push({
+            ...item,
+            defaultHidden: true,
+          });
+        }
       });
+
       // Sort according to another array
       if (!isEqual(cacheKeys, columns)) {
         newColumns.sort((prev, next) => {
           return (
-            columnKeys.indexOf(prev.dataIndex as string) -
-            columnKeys.indexOf(next.dataIndex as string)
+            cacheKeys.indexOf(prev.dataIndex as string) -
+            cacheKeys.indexOf(next.dataIndex as string)
           );
         });
       }

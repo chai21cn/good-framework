@@ -14,7 +14,7 @@ import {
 import { useTimeoutFn } from '/@/hooks/core/useTimeout';
 import { buildUUID } from '/@/utils/uuid';
 import { isFunction, isBoolean } from '/@/utils/is';
-import { get, cloneDeep, merge } from 'lodash-es';
+import { get, cloneDeep } from 'lodash-es';
 import { FETCH_SETTING, ROW_KEY, PAGE_SIZE } from '../const';
 
 interface ActionType {
@@ -196,10 +196,11 @@ export function useDataSource(
   }
 
   function insertTableDataRecord(record: Recordable, index: number): Recordable | undefined {
-    // if (!dataSourceRef.value || dataSourceRef.value.length == 0) return;
+    if (!dataSourceRef.value || dataSourceRef.value.length == 0) return;
     index = index ?? dataSourceRef.value?.length;
     unref(dataSourceRef).splice(index, 0, record);
-    return unref(dataSourceRef);
+    unref(propsRef).dataSource?.splice(index, 0, record);
+    return unref(propsRef).dataSource;
   }
 
   function findTableDataRecord(rowKey: string | number) {
@@ -246,6 +247,7 @@ export function useDataSource(
       defSort,
       fetchSetting,
       beforeFetch,
+      beforeResponse,
       afterFetch,
       useSearchForm,
       pagination,
@@ -271,22 +273,27 @@ export function useDataSource(
 
       const { sortInfo = {}, filterInfo } = searchState;
 
-      let params: Recordable = merge(
-        pageParams,
-        useSearchForm ? getFieldsValue() : {},
-        searchInfo,
-        opt?.searchInfo ?? {},
-        defSort,
-        sortInfo,
-        filterInfo,
-        opt?.sortInfo ?? {},
-        opt?.filterInfo ?? {},
-      );
+      let params: Recordable = {
+        ...pageParams,
+        ...(useSearchForm ? getFieldsValue() : {}),
+        ...searchInfo,
+        ...(opt?.searchInfo ?? {}),
+        ...defSort,
+        ...sortInfo,
+        ...filterInfo,
+        ...(opt?.sortInfo ?? {}),
+        ...(opt?.filterInfo ?? {}),
+      };
       if (beforeFetch && isFunction(beforeFetch)) {
         params = (await beforeFetch(params)) || params;
       }
 
-      const res = await api(params);
+      let res = await api(params);
+
+      // 增加用户自定义的返回数据处理函数
+      if (beforeResponse && isFunction(beforeResponse)) {
+        res = beforeResponse(res);
+      }
       rawDataSourceRef.value = res;
 
       const isArrayResult = Array.isArray(res);

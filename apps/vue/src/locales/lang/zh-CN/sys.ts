@@ -74,6 +74,10 @@ export default {
     registerButton: '注册',
     rememberMe: '记住我',
     forgetPassword: '忘记密码?',
+    passwordLogin: '用户密码登录',
+    phoneLogin: '手机验证码登录',
+    wechatLogin: '微信认证登录',
+    ssoLogin: '认证中心登录',
     otherSignIn: '其他登录方式',
 
     // notify
@@ -94,5 +98,10 @@ export default {
     email: '邮箱',
     smsCode: '短信验证码',
     mobile: '手机号码',
+  },
+  abp: {
+    remoteServiceNotFound: '没有找到名为 {name} 的服务定义!',
+    controllerNotFound: '没有找到名为 {name} 的控制器定义!',
+    actionNotFound: '没有找到名为 {name} 的方法定义!',
   },
 };

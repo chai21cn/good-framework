@@ -1,10 +1,10 @@
 import type { ComputedRef, Ref } from 'vue';
 import type { FormProps, FormSchema, FormActionType } from '../types/form';
 import type { NamePath } from 'ant-design-vue/lib/form/interface';
-import { unref, toRaw, nextTick } from 'vue';
+import { unref, toRaw } from 'vue';
 import { isArray, isFunction, isObject, isString } from '/@/utils/is';
 import { deepMerge } from '/@/utils';
-import { dateItemType, handleInputNumberValue, defaultValueComponents } from '../helper';
+import { dateItemType, handleInputNumberValue } from '../helper';
 import { dateUtil } from '/@/utils/dateUtil';
 import { cloneDeep, uniqBy } from 'lodash-es';
 import { error } from '/@/utils/log';
@@ -37,12 +37,9 @@ export function useFormEvents({
     if (!formEl) return;
 
     Object.keys(formModel).forEach((key) => {
-      const schema = unref(getSchema).find((item) => item.field === key);
-      const isInput = schema?.component && defaultValueComponents.includes(schema.component);
-      formModel[key] = isInput ? defaultValueRef.value[key] || '' : defaultValueRef.value[key];
+      formModel[key] = defaultValueRef.value[key];
     });
-    nextTick(() => clearValidate());
-
+    clearValidate();
     emit('reset', toRaw(formModel));
     submitOnReset && handleSubmit();
   }
@@ -56,38 +53,53 @@ export function useFormEvents({
       .filter(Boolean);
 
     const validKeys: string[] = [];
+    validKeys.push(..._setFieldsValue(values, fields));
+    validateFields(validKeys);
+  }
+  function _setFieldsValue(values: Recordable, fields: string[]) {
+    const validKeys: string[] = [];
     Object.keys(values).forEach((key) => {
-      const schema = unref(getSchema).find((item) => item.field === key);
       let value = values[key];
+      // fix: array are also objects.
+      if (value && !Array.isArray(value) && typeof value === 'object') {
+        // 增加子属性的字段
+        const sValue: Recordable = {};
+        Object.keys(value).forEach((sk) => {
+          sValue[`${key}.${sk}`] = value[sk];
+        });
+        validKeys.push(..._setFieldsValue(sValue, fields));
+      } else {
+        const schema = unref(getSchema).find((item) => item.field === key);
 
-      const hasKey = Reflect.has(values, key);
+        const hasKey = Reflect.has(values, key);
 
-      value = handleInputNumberValue(schema?.component, value);
-      // 0| '' is allow
-      if (hasKey && fields.includes(key)) {
-        // time type
-        if (itemIsDateType(key)) {
-          if (Array.isArray(value)) {
-            const arr: any[] = [];
-            for (const ele of value) {
-              arr.push(ele ? dateUtil(ele) : null);
+        value = handleInputNumberValue(schema?.component, value);
+        // 0| '' is allow
+        if (hasKey && fields.includes(key)) {
+          // time type
+          if (itemIsDateType(key)) {
+            if (Array.isArray(value)) {
+              const arr: any[] = [];
+              for (const ele of value) {
+                arr.push(ele ? dateUtil(ele) : null);
+              }
+              formModel[key] = arr;
+            } else {
+              const { componentProps } = schema || {};
+              let _props = componentProps as any;
+              if (typeof componentProps === 'function') {
+                _props = _props({ formModel });
+              }
+              formModel[key] = value ? (_props?.valueFormat ? value : dateUtil(value)) : null;
             }
-            formModel[key] = arr;
           } else {
-            const { componentProps } = schema || {};
-            let _props = componentProps as any;
-            if (typeof componentProps === 'function') {
-              _props = _props({ formModel });
-            }
-            formModel[key] = value ? (_props?.valueFormat ? value : dateUtil(value)) : null;
+            formModel[key] = value;
           }
-        } else {
-          formModel[key] = value;
+          validKeys.push(key);
         }
-        validKeys.push(key);
       }
     });
-    validateFields(validKeys).catch((_) => {});
+    return validKeys;
   }
   /**
    * @description: Delete based on field name
@@ -128,6 +140,9 @@ export function useFormEvents({
     const schemaList: FormSchema[] = cloneDeep(unref(getSchema));
 
     const index = schemaList.findIndex((schema) => schema.field === prefixField);
+    const hasInList = schemaList.some((item) => item.field === prefixField || schema.field);
+
+    if (!hasInList) return;
 
     if (!prefixField || index === -1 || first) {
       first ? schemaList.unshift(schema) : schemaList.push(schema);

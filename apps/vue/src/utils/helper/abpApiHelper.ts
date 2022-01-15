@@ -21,7 +21,7 @@ export class UrlBuilder {
   public static generateUrlWithParameters(
     action: ActionApiDescriptionModel,
     methodArguments: any,
-    apiVersion: ApiVersionInfo,
+    apiVersion: ApiVersionInfo
   ) {
     // fix: 需要前缀，可能引起api调用错误
     let urlBuilder = action.url.startsWith('/') ? action.url : `/${action.url}`;
@@ -29,13 +29,13 @@ export class UrlBuilder {
       urlBuilder,
       action.parameters,
       methodArguments,
-      apiVersion,
+      apiVersion
     );
     urlBuilder = this.addQueryStringParameters(
       urlBuilder,
       action.parameters,
       methodArguments,
-      apiVersion,
+      apiVersion
     );
     return urlBuilder;
   }
@@ -44,10 +44,10 @@ export class UrlBuilder {
     urlBuilder: string,
     actionParameters: ParameterApiDescriptionModel[],
     methodArguments: any,
-    apiVersion: ApiVersionInfo,
+    apiVersion: ApiVersionInfo
   ) {
     const pathParameters = actionParameters.filter(
-      (x) => x.bindingSourceId === ParameterBindingSources.path,
+      (x) => x.bindingSourceId === ParameterBindingSources.path
     );
     if (pathParameters.length === 0) {
       return urlBuilder;
@@ -65,11 +65,11 @@ export class UrlBuilder {
           } else if (pathParameter.defaultValue) {
             urlBuilder = urlBuilder.replace(
               `{${pathParameter.name}}`,
-              String(pathParameter.defaultValue),
+              String(pathParameter.defaultValue)
             );
           } else {
             throw new Error(
-              `Missing path parameter value for ${pathParameter.name} (${pathParameter.nameOnMethod})`,
+              `Missing path parameter value for ${pathParameter.name} (${pathParameter.nameOnMethod})`
             );
           }
         } else {
@@ -83,16 +83,16 @@ export class UrlBuilder {
     urlBuilder: string,
     actionParameters: ParameterApiDescriptionModel[],
     methodArguments: any,
-    apiVersion: ApiVersionInfo,
+    apiVersion: ApiVersionInfo
   ) {
     const queryStringParameters = actionParameters.filter((x) =>
-      bindSources.some((b) => b === x.bindingSourceId),
+      bindSources.some((b) => b === x.bindingSourceId)
     );
     let isFirstParam = true;
     queryStringParameters.forEach((queryStringParameter) => {
       const value = HttpActionParameterHelper.findParameterValue(
         methodArguments,
-        queryStringParameter,
+        queryStringParameter
       );
       if (!value) {
         return;
@@ -101,7 +101,7 @@ export class UrlBuilder {
         urlBuilder,
         isFirstParam,
         queryStringParameter.name,
-        value,
+        value
       );
       isFirstParam = false;
     });
@@ -110,7 +110,7 @@ export class UrlBuilder {
         urlBuilder,
         isFirstParam,
         'api-version',
-        apiVersion.version,
+        apiVersion.version
       );
     }
     return urlBuilder;
@@ -120,7 +120,7 @@ export class UrlBuilder {
     urlBuilder: string,
     isFirstParam: boolean,
     name: string,
-    value: any,
+    value: any
   ) {
     urlBuilder += isFirstParam ? '?' : '&';
     if (Array.isArray(value)) {
@@ -139,14 +139,14 @@ export class UrlBuilder {
 export class HttpActionParameterHelper {
   public static findParameterValue(
     methodArguments: any,
-    apiParameter: ParameterApiDescriptionModel,
+    apiParameter: ParameterApiDescriptionModel
   ) {
     const methodArgKeys = Object.keys(methodArguments);
     const keyIndex =
       apiParameter.name === apiParameter.nameOnMethod
         ? methodArgKeys.findIndex((key) => apiParameter.name.toLowerCase() === key.toLowerCase())
         : methodArgKeys.findIndex(
-            (key) => apiParameter.nameOnMethod.toLowerCase() === key.toLowerCase(),
+            (key) => apiParameter.nameOnMethod.toLowerCase() === key.toLowerCase()
           );
 
     let value = methodArguments[methodArgKeys[keyIndex]];
@@ -161,7 +161,7 @@ export class HttpActionParameterHelper {
 
     const inputKeys = Object.keys(value);
     const inputKeyIndex = inputKeys.findIndex(
-      (key) => key.toLowerCase() === apiParameter.name.toLowerCase(),
+      (key) => key.toLowerCase() === apiParameter.name.toLowerCase()
     );
     // fix bug: 请求参数为空时返回空字符串而不是null
     value = inputKeyIndex < 0 ? '' : value[inputKeys[inputKeyIndex]] ?? '';

@@ -221,7 +221,8 @@ namespace Good.Framework.Abp.UI.Navigation.VueVbenAdmin
                 displayName: "平台管理",
                 url: "/platform",
                 component: "",
-                description: "平台管理");
+                description: "平台管理",
+                icon: "ant-design:global-outlined");
             platform.AddItem(
               new ApplicationMenu(
                   name: "DataDictionary",

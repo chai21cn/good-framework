@@ -63,6 +63,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Good.Framework.Platform.Htt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Good.Framework.DbMigrator.Domain", "src\migrators\Good.Framework.DbMigrator.Domain\Good.Framework.DbMigrator.Domain.csproj", "{EE69561D-97B6-4393-96F2-9D73CC827751}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{391EEE38-0294-46CE-8EDC-FAEDE8ED73E8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Good.Framework.Abp.Localization.Dynamic", "src\modules\common\Good.Framework.Abp.Localization.Dynamic\Good.Framework.Abp.Localization.Dynamic.csproj", "{39A7CB5D-C18B-4141-A31D-4C1EA2D7C9C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "localization", "localization", "{B16DCF4D-4711-4F21-A9D7-2223BBAA968C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Good.Framework.Abp.Localization.CultureMap", "src\modules\localization\Good.Framework.Abp.Localization.CultureMap\Good.Framework.Abp.Localization.CultureMap.csproj", "{D32B1D1D-C764-419C-9F1F-F3CC6350F973}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Good.Framework.Abp.Localization.Xml", "src\modules\localization\Good.Framework.Abp.Localization.Xml\Good.Framework.Abp.Localization.Xml.csproj", "{74880BB3-A418-446F-A964-CFC81D137D3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -161,6 +171,18 @@ Global
 		{EE69561D-97B6-4393-96F2-9D73CC827751}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE69561D-97B6-4393-96F2-9D73CC827751}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE69561D-97B6-4393-96F2-9D73CC827751}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39A7CB5D-C18B-4141-A31D-4C1EA2D7C9C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39A7CB5D-C18B-4141-A31D-4C1EA2D7C9C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39A7CB5D-C18B-4141-A31D-4C1EA2D7C9C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39A7CB5D-C18B-4141-A31D-4C1EA2D7C9C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D32B1D1D-C764-419C-9F1F-F3CC6350F973}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D32B1D1D-C764-419C-9F1F-F3CC6350F973}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D32B1D1D-C764-419C-9F1F-F3CC6350F973}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D32B1D1D-C764-419C-9F1F-F3CC6350F973}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74880BB3-A418-446F-A964-CFC81D137D3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74880BB3-A418-446F-A964-CFC81D137D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74880BB3-A418-446F-A964-CFC81D137D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74880BB3-A418-446F-A964-CFC81D137D3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -192,6 +214,11 @@ Global
 		{AED47686-10F3-4837-BDDC-BBF4BBD70D9E} = {AC0D8047-B635-4661-BBF5-176D61A34566}
 		{0172AC66-9245-41E8-88D8-0AAD3ABD0807} = {AC0D8047-B635-4661-BBF5-176D61A34566}
 		{EE69561D-97B6-4393-96F2-9D73CC827751} = {3BB1D479-0768-4806-8E77-D6FC50F27904}
+		{391EEE38-0294-46CE-8EDC-FAEDE8ED73E8} = {FBBC6587-CC01-48B9-8B12-702039AAE302}
+		{39A7CB5D-C18B-4141-A31D-4C1EA2D7C9C3} = {391EEE38-0294-46CE-8EDC-FAEDE8ED73E8}
+		{B16DCF4D-4711-4F21-A9D7-2223BBAA968C} = {FBBC6587-CC01-48B9-8B12-702039AAE302}
+		{D32B1D1D-C764-419C-9F1F-F3CC6350F973} = {B16DCF4D-4711-4F21-A9D7-2223BBAA968C}
+		{74880BB3-A418-446F-A964-CFC81D137D3D} = {B16DCF4D-4711-4F21-A9D7-2223BBAA968C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28315BFD-90E7-4E14-A2EA-F3D23AF4126F}
