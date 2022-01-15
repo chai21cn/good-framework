@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\..\common.props" />
+  <Import Project="..\..\..\..\common.props" />
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\modules\basic\Good.Framework.Application\Good.Framework.Application.csproj" />
-    <ProjectReference Include="..\Good.Framework.Domain.Tests\Good.Framework.Domain.Tests.csproj" />
+    <ProjectReference Include="..\..\..\modules\basic\Good.Framework.Basic.Application\Good.Framework.Basic.Application.csproj" />
+    <ProjectReference Include="..\Good.Framework.Basic.Domain.Tests\Good.Framework.Basic.Domain.Tests.csproj" />
   </ItemGroup>
 
   <ItemGroup>

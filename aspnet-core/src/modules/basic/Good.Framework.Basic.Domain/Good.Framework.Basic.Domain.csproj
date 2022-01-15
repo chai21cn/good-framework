@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Good.Framework.Domain.Shared\Good.Framework.Domain.Shared.csproj" />
+    <ProjectReference Include="..\Good.Framework.Basic.Domain.Shared\Good.Framework.Basic.Domain.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

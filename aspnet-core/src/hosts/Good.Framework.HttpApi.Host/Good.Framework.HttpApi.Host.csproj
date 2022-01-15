@@ -22,9 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\modules\basic\Good.Framework.Application\Good.Framework.Application.csproj" />
-    <ProjectReference Include="..\..\modules\basic\Good.Framework.EntityFrameworkCore\Good.Framework.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\..\modules\basic\Good.Framework.HttpApi\Good.Framework.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\basic\Good.Framework.Basic.Application\Good.Framework.Basic.Application.csproj" />
+    <ProjectReference Include="..\..\modules\basic\Good.Framework.Basic.EntityFrameworkCore\Good.Framework.Basic.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\modules\basic\Good.Framework.Basic.HttpApi\Good.Framework.Basic.HttpApi.csproj" />
     <ProjectReference Include="..\..\modules\platform\Good.Framework.Platform.Application\Good.Framework.Platform.Application.csproj" />
     <ProjectReference Include="..\..\modules\platform\Good.Framework.Platform.EntityFrameworkCore\Good.Framework.Platform.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\modules\platform\Good.Framework.Platform.HttpApi\Good.Framework.Platform.HttpApi.csproj" />

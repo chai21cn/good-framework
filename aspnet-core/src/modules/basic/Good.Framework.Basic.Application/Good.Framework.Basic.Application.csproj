@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Good.Framework.Domain\Good.Framework.Domain.csproj" />
-    <ProjectReference Include="..\Good.Framework.Application.Contracts\Good.Framework.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Good.Framework.Basic.Domain\Good.Framework.Basic.Domain.csproj" />
+    <ProjectReference Include="..\Good.Framework.Basic.Application.Contracts\Good.Framework.Basic.Application.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>

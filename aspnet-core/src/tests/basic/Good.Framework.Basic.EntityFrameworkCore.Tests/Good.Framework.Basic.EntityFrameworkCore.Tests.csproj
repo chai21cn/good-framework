@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\..\common.props" />
+  <Import Project="..\..\..\..\common.props" />
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\modules\basic\Good.Framework.EntityFrameworkCore\Good.Framework.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\Good.Framework.TestBase\Good.Framework.TestBase.csproj" />
+    <ProjectReference Include="..\..\..\modules\basic\Good.Framework.Basic.EntityFrameworkCore\Good.Framework.Basic.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Good.Framework.Basic.TestBase\Good.Framework.Basic.TestBase.csproj" />
     <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="5.0.1" />
   </ItemGroup>
 

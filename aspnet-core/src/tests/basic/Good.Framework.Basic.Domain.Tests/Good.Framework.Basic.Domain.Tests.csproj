@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\..\common.props" />
+  <Import Project="..\..\..\..\common.props" />
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Good.Framework.EntityFrameworkCore.Tests\Good.Framework.EntityFrameworkCore.Tests.csproj" />
+    <ProjectReference Include="..\Good.Framework.Basic.EntityFrameworkCore.Tests\Good.Framework.Basic.EntityFrameworkCore.Tests.csproj" />
   </ItemGroup>
 
   <ItemGroup>
