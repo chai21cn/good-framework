@@ -39,7 +39,6 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') 
     },
     {
       errorMessageMode: mode,
-      apiUrl: '/connect',
     },
   );
 }
@@ -69,7 +68,6 @@ export function loginPhoneApi(params: LoginByPhoneParams, mode: ErrorMessageMode
     },
     {
       errorMessageMode: mode,
-      apiUrl: '/connect',
     },
   );
 }
@@ -81,11 +79,11 @@ export function getUserInfo() {
   return defHttp.get<GetUserInfoModel>(
     {
       url: Api.GetUserInfo,
-    }, 
+    },
     {
       errorMessageMode: 'none',
-      apiUrl: '/connect',
-    });
+    },
+  );
 }
 
 export function getPermCode() {

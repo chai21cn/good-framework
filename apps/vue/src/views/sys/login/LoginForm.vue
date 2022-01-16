@@ -10,9 +10,6 @@
     labelAlign="left"
     @keypress.enter="handleLogin"
   >
-    <FormItem>
-      <MultiTenancyBox />
-    </FormItem>
     <FormItem name="userName" class="enter-x" :label="t('AbpAccount.DisplayName:UserName')">
       <BInput
         size="large"
@@ -139,8 +136,8 @@
   const rememberMe = ref(false);
 
   const formData = reactive({
-    userName: '',
-    password: '',
+    userName: 'admin',
+    password: '1q2w3E*',
   });
 
   const { validForm } = useFormValid(formRef);
