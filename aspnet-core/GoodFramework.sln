@@ -72,10 +72,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodFramework.Abp.Localizat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodFramework.Abp.Localization.Xml", "src\modules\localization\GoodFramework.Abp.Localization.Xml\GoodFramework.Abp.Localization.Xml.csproj", "{74880BB3-A418-446F-A964-CFC81D137D3D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{390FC193-94B1-4B5C-ACC0-CE661E3DABBD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodFramework.Common", "src\common\GoodFramework.Common\GoodFramework.Common.csproj", "{A41034A8-BD99-4D63-9CB1-DEA994A2A26B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -186,10 +182,6 @@ Global
 		{74880BB3-A418-446F-A964-CFC81D137D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74880BB3-A418-446F-A964-CFC81D137D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74880BB3-A418-446F-A964-CFC81D137D3D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A41034A8-BD99-4D63-9CB1-DEA994A2A26B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A41034A8-BD99-4D63-9CB1-DEA994A2A26B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A41034A8-BD99-4D63-9CB1-DEA994A2A26B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A41034A8-BD99-4D63-9CB1-DEA994A2A26B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -226,7 +218,6 @@ Global
 		{B16DCF4D-4711-4F21-A9D7-2223BBAA968C} = {FBBC6587-CC01-48B9-8B12-702039AAE302}
 		{D32B1D1D-C764-419C-9F1F-F3CC6350F973} = {B16DCF4D-4711-4F21-A9D7-2223BBAA968C}
 		{74880BB3-A418-446F-A964-CFC81D137D3D} = {B16DCF4D-4711-4F21-A9D7-2223BBAA968C}
-		{A41034A8-BD99-4D63-9CB1-DEA994A2A26B} = {390FC193-94B1-4B5C-ACC0-CE661E3DABBD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28315BFD-90E7-4E14-A2EA-F3D23AF4126F}
