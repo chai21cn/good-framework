@@ -1,5 +1,9 @@
+using GoodFramework.Abp.Auditing;
+using GoodFramework.Abp.AuditLogging.EntityFrameworkCore;
 using GoodFramework.Abp.Identity;
 using GoodFramework.Abp.Identity.EntityFrameworkCore;
+using GoodFramework.Abp.TaskManagement;
+using GoodFramework.Abp.TaskManagement.EntityFrameworkCore;
 using GoodFramework.Abp.UI.Navigation.VueVbenAdmin;
 using GoodFramework.Basic;
 using GoodFramework.Basic.EntityFrameworkCore;
@@ -17,9 +21,13 @@ namespace GoodFramework.DbMigrator
         typeof(BasicApplicationContractsModule),
         typeof(PlatformEntityFrameworkCoreModule),
         typeof(PlatformApplicationContractsModule),
+        typeof(TaskManagementEntityFrameworkCoreModule),
+        typeof(TaskManagementApplicationContractsModule),
         typeof(AbpUINavigationVueVbenAdminModule),
         typeof(AbpIdentityApplicationContractsModule),
-        typeof(AbpIdentityEntityFrameworkCoreModule)
+        typeof(AbpIdentityEntityFrameworkCoreModule),
+        typeof(AbpAuditingApplicationContractsModule),
+        typeof(AbpAuditLoggingEntityFrameworkCoreModule)
         )]
     public class GoodFrameworkDbMigratorModule : AbpModule
     {

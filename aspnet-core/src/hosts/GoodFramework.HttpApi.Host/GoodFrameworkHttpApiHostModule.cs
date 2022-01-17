@@ -1,6 +1,10 @@
+using GoodFramework.Abp.Auditing;
 using GoodFramework.Abp.Identity;
 using GoodFramework.Abp.Identity.EntityFrameworkCore;
 using GoodFramework.Abp.Localization.CultureMap;
+using GoodFramework.Abp.Serilog.Enrichers.Application;
+using GoodFramework.Abp.Serilog.Enrichers.UniqueId;
+using GoodFramework.Abp.SettingManagement;
 using GoodFramework.Basic;
 using GoodFramework.Basic.EntityFrameworkCore;
 using GoodFramework.Basic.MultiTenancy;
@@ -40,15 +44,34 @@ using Volo.Abp.VirtualFileSystem;
 namespace GoodFramework
 {
     [DependsOn(
+        // 基础
         typeof(BasicHttpApiModule),
         typeof(BasicApplicationModule),
         typeof(BasicEntityFrameworkCoreModule),
+        // 平台菜单管理
         typeof(PlatformHttpApiModule),
         typeof(PlatformApplicationModule),
         typeof(PlatformEntityFrameworkCoreModule),
+        // 用户管理
         typeof(AbpIdentityHttpApiModule),
         typeof(AbpIdentityApplicationModule),
         typeof(AbpIdentityEntityFrameworkCoreModule),
+        // Account
+        typeof(AbpAccountHttpApiModule),
+        typeof(AbpAccountApplicationModule),
+        // 设置
+        typeof(AbpSettingManagementHttpApiModule),
+        typeof(AbpSettingManagementApplicationModule),
+        // 审计
+        typeof(AbpAuditingApplicationModule),
+        typeof(AbpAuditingHttpApiModule),
+        // 日志
+        typeof(AbpSerilogEnrichersApplicationModule),
+        typeof(AbpSerilogEnrichersUniqueIdModule),
+        typeof(AbpAspNetCoreSerilogModule),
+        // typeof(AbpLoggingSerilogElasticsearchModule),
+        // typeof(AbpAuditLoggingElasticsearchModule),
+        // ABP默认
         typeof(AbpAutofacModule),
         typeof(AbpAspNetCoreMultiTenancyModule),
         typeof(AbpAspNetCoreMvcUiBasicThemeModule),

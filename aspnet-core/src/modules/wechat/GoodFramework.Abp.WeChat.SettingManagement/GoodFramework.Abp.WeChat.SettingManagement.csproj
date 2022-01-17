@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<RootNamespace />
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="GoodFramework\Abp\WeChat\SettingManagement\Localization\Resources\en.json" />
+	  <None Remove="GoodFramework\Abp\WeChat\SettingManagement\Localization\Resources\zh-Hans.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="GoodFramework\Abp\WeChat\SettingManagement\Localization\Resources\en.json" />
+	  <EmbeddedResource Include="GoodFramework\Abp\WeChat\SettingManagement\Localization\Resources\zh-Hans.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="5.1.1" />
+		<PackageReference Include="Volo.Abp.SettingManagement.Domain" Version="5.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\settings\GoodFramework.Abp.SettingManagement.Application.Contracts\GoodFramework.Abp.SettingManagement.Application.Contracts.csproj" />
+	  <ProjectReference Include="..\GoodFramework.Abp.WeChat.MiniProgram\GoodFramework.Abp.WeChat.MiniProgram.csproj" />
+	  <ProjectReference Include="..\GoodFramework.Abp.WeChat.Official\GoodFramework.Abp.WeChat.Official.csproj" />
+	</ItemGroup>
+
+</Project>

@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace />
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="GoodFramework\Abp\WeChat\MiniProgram\Localization\Resources\en.json" />
+		<None Remove="GoodFramework\Abp\WeChat\MiniProgram\Localization\Resources\zh-Hans.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="GoodFramework\Abp\WeChat\MiniProgram\Localization\Resources\en.json" />
+		<EmbeddedResource Include="GoodFramework\Abp\WeChat\MiniProgram\Localization\Resources\zh-Hans.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\common\GoodFramework.Abp.Features.LimitValidation\GoodFramework.Abp.Features.LimitValidation.csproj" />
+		<ProjectReference Include="..\GoodFramework.Abp.WeChat\GoodFramework.Abp.WeChat.csproj" />
+	</ItemGroup>
+
+</Project>

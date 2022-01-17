@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace />
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.Ddd.Application" Version="4.4.0" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GoodFramework.Abp.WeChat.Application.Contracts\GoodFramework.Abp.WeChat.Application.Contracts.csproj" />
+    <ProjectReference Include="..\GoodFramework.Abp.WeChat.MiniProgram\GoodFramework.Abp.WeChat.MiniProgram.csproj" />
+  </ItemGroup>
+
+</Project>

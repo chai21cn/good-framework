@@ -22,6 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\modules\account\GoodFramework.Abp.Account.Application\GoodFramework.Abp.Account.Application.csproj" />
+    <ProjectReference Include="..\..\modules\account\GoodFramework.Abp.Account.HttpApi\GoodFramework.Abp.Account.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\auditing\GoodFramework.Abp.Auditing.Application\GoodFramework.Abp.Auditing.Application.csproj" />
+    <ProjectReference Include="..\..\modules\auditing\GoodFramework.Abp.Auditing.HttpApi\GoodFramework.Abp.Auditing.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\auditing\GoodFramework.Abp.AuditLogging.Elasticsearch\GoodFramework.Abp.AuditLogging.Elasticsearch.csproj" />
     <ProjectReference Include="..\..\modules\basic\GoodFramework.Basic.Application\GoodFramework.Basic.Application.csproj" />
     <ProjectReference Include="..\..\modules\basic\GoodFramework.Basic.EntityFrameworkCore\GoodFramework.Basic.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\modules\basic\GoodFramework.Basic.HttpApi\GoodFramework.Basic.HttpApi.csproj" />
@@ -30,9 +35,14 @@
     <ProjectReference Include="..\..\modules\identity\GoodFramework.Abp.Identity.EntityFrameworkCore\GoodFramework.Abp.Identity.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\modules\identity\GoodFramework.Abp.Identity.HttpApi\GoodFramework.Abp.Identity.HttpApi.csproj" />
     <ProjectReference Include="..\..\modules\localization\GoodFramework.Abp.Localization.CultureMap\GoodFramework.Abp.Localization.CultureMap.csproj" />
+    <ProjectReference Include="..\..\modules\logging\GoodFramework.Abp.Logging.Serilog.Elasticsearch\GoodFramework.Abp.Logging.Serilog.Elasticsearch.csproj" />
+	<ProjectReference Include="..\..\modules\logging\GoodFramework.Abp.Serilog.Enrichers.Application\GoodFramework.Abp.Serilog.Enrichers.Application.csproj" />
+    <ProjectReference Include="..\..\modules\logging\GoodFramework.Abp.Serilog.Enrichers.UniqueId\GoodFramework.Abp.Serilog.Enrichers.UniqueId.csproj" />
     <ProjectReference Include="..\..\modules\platform\GoodFramework.Platform.Application\GoodFramework.Platform.Application.csproj" />
     <ProjectReference Include="..\..\modules\platform\GoodFramework.Platform.EntityFrameworkCore\GoodFramework.Platform.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\modules\platform\GoodFramework.Platform.HttpApi\GoodFramework.Platform.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\settings\GoodFramework.Abp.SettingManagement.Application\GoodFramework.Abp.SettingManagement.Application.csproj" />
+    <ProjectReference Include="..\..\modules\settings\GoodFramework.Abp.SettingManagement.HttpApi\GoodFramework.Abp.SettingManagement.HttpApi.csproj" />
   </ItemGroup>
 
   <ItemGroup>

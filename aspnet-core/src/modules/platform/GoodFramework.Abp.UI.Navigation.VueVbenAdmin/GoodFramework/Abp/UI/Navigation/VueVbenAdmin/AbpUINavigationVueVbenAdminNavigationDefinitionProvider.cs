@@ -169,6 +169,13 @@ namespace GoodFramework.Abp.UI.Navigation.VueVbenAdmin
                     description: "持久授权",
                     multiTenancySides: MultiTenancySides.Host));
 
+            manage.AddItem(
+                new ApplicationMenu(
+                    name: "BackgroundJobs",
+                    displayName: "后台任务",
+                    url: "/manage/background-jobs",
+                    component: "/task-management/background-jobs/index",
+                    description: "后台任务"));
 
             manage.AddItem(
                 new ApplicationMenu(

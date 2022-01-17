@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Account.Application" Version="5.1.1" />
+    <PackageReference Include="Volo.Abp.Sms" Version="5.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\common\GoodFramework.Abp.Settings\GoodFramework.Abp.Settings.csproj" />
+    <ProjectReference Include="..\..\identity\GoodFramework.Abp.Identity.Domain\GoodFramework.Abp.Identity.Domain.csproj" />
+    <ProjectReference Include="..\..\wechat\GoodFramework.Abp.WeChat.MiniProgram\GoodFramework.Abp.WeChat.MiniProgram.csproj" />
+    <ProjectReference Include="..\GoodFramework.Abp.Account.Application.Contracts\GoodFramework.Abp.Account.Application.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

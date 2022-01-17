@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\common.props" />
+	<Import Project="..\..\..\configureawait.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<RootNamespace />
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="GoodFramework\Abp\IdentityServer\WeChat\Localization\en.json" />
+	  <EmbeddedResource Include="GoodFramework\Abp\IdentityServer\WeChat\Localization\zh-Hans.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.IdentityServer.Domain" Version="$(VoloAbpPackageVersion)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\wechat\GoodFramework.Abp.Identity.WeChat\GoodFramework.Abp.Identity.WeChat.csproj" />
+	  <ProjectReference Include="..\..\wechat\GoodFramework.Abp.WeChat.MiniProgram\GoodFramework.Abp.WeChat.MiniProgram.csproj" />
+	  <ProjectReference Include="..\..\wechat\GoodFramework.Abp.WeChat.Official\GoodFramework.Abp.WeChat.Official.csproj" />
+	</ItemGroup>
+
+</Project>

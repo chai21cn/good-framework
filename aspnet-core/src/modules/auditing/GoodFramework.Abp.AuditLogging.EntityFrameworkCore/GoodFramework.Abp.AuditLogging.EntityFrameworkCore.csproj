@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="5.1.1" />
+    <PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="5.1.1" />
+    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="5.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GoodFramework.Abp.AuditLogging\GoodFramework.Abp.AuditLogging.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\common.props" />
+	<Import Project="..\..\..\configureawait.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<RootNamespace />
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="GoodFramework\Abp\IdentityServer\Localization\SmsValidator\en.json" />
+		<None Remove="GoodFramework\Abp\IdentityServer\Localization\SmsValidator\zh-Hans.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="GoodFramework\Abp\IdentityServer\Localization\SmsValidator\en.json" />
+		<EmbeddedResource Include="GoodFramework\Abp\IdentityServer\Localization\SmsValidator\zh-Hans.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.IdentityServer.Domain" Version="$(VoloAbpPackageVersion)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\identity\GoodFramework.Abp.Identity.Domain\GoodFramework.Abp.Identity.Domain.csproj" />
+	</ItemGroup>
+
+</Project>

@@ -30,6 +30,8 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Autofac" Version="5.1.1" />
+    <ProjectReference Include="..\..\modules\auditing\GoodFramework.Abp.Auditing.Application.Contracts\GoodFramework.Abp.Auditing.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\modules\auditing\GoodFramework.Abp.AuditLogging.EntityFrameworkCore\GoodFramework.Abp.AuditLogging.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\modules\basic\GoodFramework.Basic.Application.Contracts\GoodFramework.Basic.Application.Contracts.csproj" />
     <ProjectReference Include="..\..\modules\basic\GoodFramework.Basic.EntityFrameworkCore\GoodFramework.Basic.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\modules\identity\GoodFramework.Abp.Identity.Application.Contracts\GoodFramework.Abp.Identity.Application.Contracts.csproj" />
@@ -37,6 +39,8 @@
     <ProjectReference Include="..\..\modules\platform\GoodFramework.Abp.UI.Navigation.VueVbenAdmin\GoodFramework.Abp.UI.Navigation.VueVbenAdmin.csproj" />
     <ProjectReference Include="..\..\modules\platform\GoodFramework.Platform.Application.Contracts\GoodFramework.Platform.Application.Contracts.csproj" />
     <ProjectReference Include="..\..\modules\platform\GoodFramework.Platform.EntityFrameworkCore\GoodFramework.Platform.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\modules\task-management\GoodFramework.Abp.TaskManagement.Application.Contracts\GoodFramework.Abp.TaskManagement.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\modules\task-management\GoodFramework.Abp.TaskManagement.EntityFrameworkCore\GoodFramework.Abp.TaskManagement.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\GoodFramework.DbMigrator.Domain\GoodFramework.DbMigrator.Domain.csproj" />
   </ItemGroup>
 

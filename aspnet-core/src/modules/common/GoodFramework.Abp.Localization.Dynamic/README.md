@@ -1,4 +1,4 @@
-# LINGYUN.Abp.Localization.Dynamic
+# GoodFramework.Abp.Localization.Dynamic
 
 动态本地化提供者组件,添加动态提供者可实现运行时替换本地化文本  
 
@@ -35,4 +35,4 @@ public class YouProjectModule : AbpModule
 
 动态资源在启动时加载，如果通过LocalizationManagement模块查询，可能受后端存储资源体量影响整体启动时间  
 
-详情见: [DynamicLocalizationInitializeService](./LINGYUN/Abp/Localization/Dynamic/DynamicLocalizationInitializeService.cs#L25-L38)
+详情见: [DynamicLocalizationInitializeService](./GoodFramework/Abp/Localization/Dynamic/DynamicLocalizationInitializeService.cs#L25-L38)

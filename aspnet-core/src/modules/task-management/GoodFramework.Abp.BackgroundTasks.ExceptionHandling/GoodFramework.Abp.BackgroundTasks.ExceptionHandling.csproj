@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<RootNamespace />
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="GoodFramework\Abp\BackgroundTasks\ExceptionHandling\Localization\Resources\*.json" />
+		<None Remove="GoodFramework\Abp\BackgroundTasks\ExceptionHandling\Templates\*.tpl" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="GoodFramework\Abp\BackgroundTasks\ExceptionHandling\Localization\Resources\*.json" />
+		<EmbeddedResource Include="GoodFramework\Abp\BackgroundTasks\ExceptionHandling\Templates\*.tpl" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.Timing" Version="5.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\GoodFramework.Abp.BackgroundTasks.Jobs\GoodFramework.Abp.BackgroundTasks.Jobs.csproj" />
+		<ProjectReference Include="..\GoodFramework.Abp.BackgroundTasks\GoodFramework.Abp.BackgroundTasks.csproj" />
+	</ItemGroup>
+
+</Project>

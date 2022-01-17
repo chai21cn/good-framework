@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Json" Version="5.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\elasticsearch\GoodFramework.Abp.Elasticsearch\GoodFramework.Abp.Elasticsearch.csproj" />
+    <ProjectReference Include="..\GoodFramework.Abp.AuditLogging\GoodFramework.Abp.AuditLogging.csproj" />
+  </ItemGroup>
+
+</Project>

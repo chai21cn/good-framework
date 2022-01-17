@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\common\GoodFramework.Abp.Features.LimitValidation\GoodFramework.Abp.Features.LimitValidation.csproj" />
+		<ProjectReference Include="..\..\common\GoodFramework.Abp.Notifications\GoodFramework.Abp.Notifications.csproj" />
+		<ProjectReference Include="..\GoodFramework.Abp.WeChat.MiniProgram\GoodFramework.Abp.WeChat.MiniProgram.csproj" />
+	</ItemGroup>
+
+</Project>

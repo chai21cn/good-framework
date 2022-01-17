@@ -1,24 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-	<Import Project="..\..\..\..\common.props" />
+  <Import Project="..\..\..\..\common.props" />
 
-	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
-		<RootNamespace />
-	</PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace />
+  </PropertyGroup>
 
-	<ItemGroup>
-	  <None Remove="GoodFramework\Abp\Identity\Localization\en.json" />
-	  <None Remove="GoodFramework\Abp\Identity\Localization\zh-Hans.json" />
-	</ItemGroup>
+  <ItemGroup>
+    <None Remove="GoodFramework\Abp\Identity\Localization\en.json" />
+    <None Remove="GoodFramework\Abp\Identity\Localization\zh-Hans.json" />
+  </ItemGroup>
 
-	<ItemGroup>
-	  <EmbeddedResource Include="GoodFramework\Abp\Identity\Localization\en.json" />
-	  <EmbeddedResource Include="GoodFramework\Abp\Identity\Localization\zh-Hans.json" />
-	</ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GoodFramework\Abp\Identity\Localization\en.json" />
+    <EmbeddedResource Include="GoodFramework\Abp\Identity\Localization\zh-Hans.json" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Volo.Abp.Identity.Domain.Shared" Version="5.1.1" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Identity.Domain.Shared" Version="5.1.1" />
+  </ItemGroup>
 
 </Project>
