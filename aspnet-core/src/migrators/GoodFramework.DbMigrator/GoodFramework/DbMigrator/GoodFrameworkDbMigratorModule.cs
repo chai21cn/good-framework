@@ -1,3 +1,5 @@
+using GoodFramework.Abp.Identity;
+using GoodFramework.Abp.Identity.EntityFrameworkCore;
 using GoodFramework.Abp.UI.Navigation.VueVbenAdmin;
 using GoodFramework.Basic;
 using GoodFramework.Basic.EntityFrameworkCore;
@@ -15,7 +17,9 @@ namespace GoodFramework.DbMigrator
         typeof(BasicApplicationContractsModule),
         typeof(PlatformEntityFrameworkCoreModule),
         typeof(PlatformApplicationContractsModule),
-        typeof(AbpUINavigationVueVbenAdminModule)
+        typeof(AbpUINavigationVueVbenAdminModule),
+        typeof(AbpIdentityApplicationContractsModule),
+        typeof(AbpIdentityEntityFrameworkCoreModule)
         )]
     public class GoodFrameworkDbMigratorModule : AbpModule
     {

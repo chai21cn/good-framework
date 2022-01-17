@@ -1,3 +1,5 @@
+using GoodFramework.Abp.Identity;
+using GoodFramework.Abp.Identity.EntityFrameworkCore;
 using GoodFramework.Abp.Localization.CultureMap;
 using GoodFramework.Basic;
 using GoodFramework.Basic.EntityFrameworkCore;
@@ -44,6 +46,9 @@ namespace GoodFramework
         typeof(PlatformHttpApiModule),
         typeof(PlatformApplicationModule),
         typeof(PlatformEntityFrameworkCoreModule),
+        typeof(AbpIdentityHttpApiModule),
+        typeof(AbpIdentityApplicationModule),
+        typeof(AbpIdentityEntityFrameworkCoreModule),
         typeof(AbpAutofacModule),
         typeof(AbpAspNetCoreMultiTenancyModule),
         typeof(AbpAspNetCoreMvcUiBasicThemeModule),
