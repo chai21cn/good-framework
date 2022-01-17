@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
+using System;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 
@@ -8,17 +9,16 @@ namespace GoodFramework.Abp.BackgroundTasks.Quartz;
 public class QuartzJobSimpleAdapter<TJobRunnable> : IJob
     where TJobRunnable : IJobRunnable
 {
-    protected IServiceScopeFactory ServiceScopeFactory { get; }
+    protected IServiceProvider ServiceProvider { get; }
 
-    public QuartzJobSimpleAdapter(
-        IServiceScopeFactory serviceScopeFactory)
+    public QuartzJobSimpleAdapter(IServiceProvider serviceProvider)
     {
-        ServiceScopeFactory = serviceScopeFactory;
+        ServiceProvider = serviceProvider;
     }
 
     public async virtual Task Execute(IJobExecutionContext context)
     {
-        using var scope = ServiceScopeFactory.CreateScope();
+        using var scope = ServiceProvider.CreateScope();
         var jobExecuter = scope.ServiceProvider.GetRequiredService<IJobRunnableExecuter>();
 
         var jobContext = new JobRunnableContext(

@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-	<Import Project="..\..\..\configureawait.props" />
-	<Import Project="..\..\..\common.props" />
+	<Import Project="..\..\..\..\common.props" />
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
@@ -9,7 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Volo.Abp.Quartz" Version="$(VoloAbpPackageVersion)" />
+		<PackageReference Include="Volo.Abp.Quartz" Version="5.1.1" />
 	</ItemGroup>
 
 	<ItemGroup>

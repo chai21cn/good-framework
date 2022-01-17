@@ -13,27 +13,30 @@ using Volo.Abp.Autofac;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Modularity;
 
-namespace GoodFramework.DbMigrator
+namespace GoodFramework.DbMigrator;
+
+
+[DependsOn(
+    typeof(AbpAutofacModule),
+    // 基础
+    typeof(BasicEntityFrameworkCoreModule),
+    typeof(BasicApplicationContractsModule),
+    // 框架菜单
+    typeof(PlatformEntityFrameworkCoreModule),
+    typeof(PlatformApplicationContractsModule),
+    typeof(AbpUINavigationVueVbenAdminModule),
+    // 后台任务
+    typeof(TaskManagementEntityFrameworkCoreModule),
+    typeof(TaskManagementApplicationContractsModule),
+    // ABP
+    typeof(AbpIdentityApplicationContractsModule),
+    typeof(AbpIdentityEntityFrameworkCoreModule),
+    typeof(AbpAuditingApplicationContractsModule),
+    typeof(AbpAuditLoggingEntityFrameworkCoreModule)
+    )]
+public class GoodFrameworkDbMigratorModule : AbpModule
 {
-    [DependsOn(
-        typeof(AbpAutofacModule),
-        typeof(BasicEntityFrameworkCoreModule),
-        typeof(BasicApplicationContractsModule),
-        typeof(PlatformEntityFrameworkCoreModule),
-        typeof(PlatformApplicationContractsModule),
-        typeof(TaskManagementEntityFrameworkCoreModule),
-        typeof(TaskManagementApplicationContractsModule),
-        typeof(AbpUINavigationVueVbenAdminModule),
-        typeof(AbpIdentityApplicationContractsModule),
-        typeof(AbpIdentityEntityFrameworkCoreModule),
-        typeof(AbpAuditingApplicationContractsModule),
-        typeof(AbpAuditLoggingEntityFrameworkCoreModule)
-        )]
-    public class GoodFrameworkDbMigratorModule : AbpModule
-    {
-        public override void ConfigureServices(ServiceConfigurationContext context)
-        {
-            Configure<AbpBackgroundJobOptions>(options => options.IsJobExecutionEnabled = false);
-        }
+    public override void ConfigureServices(ServiceConfigurationContext context) {
+        Configure<AbpBackgroundJobOptions>(options => options.IsJobExecutionEnabled = false);
     }
 }

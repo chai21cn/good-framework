@@ -1,4 +1,3 @@
-using GoodFramework.Abp.BackgroundTasks;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Domain;
@@ -9,7 +8,6 @@ namespace GoodFramework.Abp.TaskManagement;
 [DependsOn(typeof(TaskManagementDomainSharedModule))]
 [DependsOn(typeof(AbpAutoMapperModule))]
 [DependsOn(typeof(AbpDddDomainModule))]
-[DependsOn(typeof(AbpBackgroundTasksModule))]
 public class TaskManagementDomainModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

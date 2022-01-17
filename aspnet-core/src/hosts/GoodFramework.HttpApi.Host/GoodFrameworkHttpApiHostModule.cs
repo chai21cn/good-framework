@@ -1,6 +1,9 @@
 using GoodFramework.Abp.Auditing;
 using GoodFramework.Abp.Identity;
 using GoodFramework.Abp.Identity.EntityFrameworkCore;
+using GoodFramework.Abp.IdentityServer;
+using GoodFramework.Abp.IdentityServer.EntityFrameworkCore;
+using GoodFramework.Abp.IdentityServer.WeChat;
 using GoodFramework.Abp.Localization.CultureMap;
 using GoodFramework.Abp.Serilog.Enrichers.Application;
 using GoodFramework.Abp.Serilog.Enrichers.UniqueId;
@@ -52,13 +55,24 @@ namespace GoodFramework
         typeof(PlatformHttpApiModule),
         typeof(PlatformApplicationModule),
         typeof(PlatformEntityFrameworkCoreModule),
-        // 用户管理
-        typeof(AbpIdentityHttpApiModule),
-        typeof(AbpIdentityApplicationModule),
-        typeof(AbpIdentityEntityFrameworkCoreModule),
         // Account
         typeof(AbpAccountHttpApiModule),
         typeof(AbpAccountApplicationModule),
+        // AbpIdentity
+        typeof(AbpIdentityHttpApiModule),
+        typeof(AbpIdentityApplicationModule),
+        typeof(AbpIdentityEntityFrameworkCoreModule),
+        // AbpIdentityServer
+        typeof(AbpIdentityServerSmsValidatorModule),
+        typeof(AbpIdentityServerWeChatModule),
+        typeof(AbpIdentityServerEntityFrameworkCoreModule),
+        // 后台任务
+        //typeof(AbpBackgroundTasksJobsModule),
+        //typeof(AbpBackgroundTasksQuartzModule),
+        //typeof(AbpBackgroundTasksExceptionHandlingModule),
+        //typeof(TaskManagementHttpApiModule),
+        //typeof(TaskManagementApplicationModule),
+        //typeof(TaskManagementEntityFrameworkCoreModule),
         // 设置
         typeof(AbpSettingManagementHttpApiModule),
         typeof(AbpSettingManagementApplicationModule),

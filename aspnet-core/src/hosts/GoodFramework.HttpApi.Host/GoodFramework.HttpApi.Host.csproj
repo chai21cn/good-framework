@@ -31,6 +31,11 @@
     <ProjectReference Include="..\..\modules\basic\GoodFramework.Basic.EntityFrameworkCore\GoodFramework.Basic.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\modules\basic\GoodFramework.Basic.HttpApi\GoodFramework.Basic.HttpApi.csproj" />
     <ProjectReference Include="..\..\modules\common\GoodFramework.Abp.Localization.Dynamic\GoodFramework.Abp.Localization.Dynamic.csproj" />
+    <ProjectReference Include="..\..\modules\identity-server\GoodFramework.Abp.IdentityServer.Application\GoodFramework.Abp.IdentityServer.Application.csproj" />
+    <ProjectReference Include="..\..\modules\identity-server\GoodFramework.Abp.IdentityServer.EntityFrameworkCore\GoodFramework.Abp.IdentityServer.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\modules\identity-server\GoodFramework.Abp.IdentityServer.HttpApi\GoodFramework.Abp.IdentityServer.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\identity-server\GoodFramework.Abp.IdentityServer.SmsValidator\GoodFramework.Abp.IdentityServer.SmsValidator.csproj" />
+    <ProjectReference Include="..\..\modules\identity-server\GoodFramework.Abp.IdentityServer.WeChat\GoodFramework.Abp.IdentityServer.WeChat.csproj" />
     <ProjectReference Include="..\..\modules\identity\GoodFramework.Abp.Identity.Application\GoodFramework.Abp.Identity.Application.csproj" />
     <ProjectReference Include="..\..\modules\identity\GoodFramework.Abp.Identity.EntityFrameworkCore\GoodFramework.Abp.Identity.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\modules\identity\GoodFramework.Abp.Identity.HttpApi\GoodFramework.Abp.Identity.HttpApi.csproj" />
@@ -43,6 +48,12 @@
     <ProjectReference Include="..\..\modules\platform\GoodFramework.Platform.HttpApi\GoodFramework.Platform.HttpApi.csproj" />
     <ProjectReference Include="..\..\modules\settings\GoodFramework.Abp.SettingManagement.Application\GoodFramework.Abp.SettingManagement.Application.csproj" />
     <ProjectReference Include="..\..\modules\settings\GoodFramework.Abp.SettingManagement.HttpApi\GoodFramework.Abp.SettingManagement.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\task-management\GoodFramework.Abp.BackgroundTasks.ExceptionHandling\GoodFramework.Abp.BackgroundTasks.ExceptionHandling.csproj" />
+    <ProjectReference Include="..\..\modules\task-management\GoodFramework.Abp.BackgroundTasks.Jobs\GoodFramework.Abp.BackgroundTasks.Jobs.csproj" />
+    <ProjectReference Include="..\..\modules\task-management\GoodFramework.Abp.BackgroundTasks.Quartz\GoodFramework.Abp.BackgroundTasks.Quartz.csproj" />
+    <ProjectReference Include="..\..\modules\task-management\GoodFramework.Abp.TaskManagement.Application\GoodFramework.Abp.TaskManagement.Application.csproj" />
+    <ProjectReference Include="..\..\modules\task-management\GoodFramework.Abp.TaskManagement.EntityFrameworkCore\GoodFramework.Abp.TaskManagement.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\modules\task-management\GoodFramework.Abp.TaskManagement.HttpApi\GoodFramework.Abp.TaskManagement.HttpApi.csproj" />
   </ItemGroup>
 
   <ItemGroup>
