@@ -4,7 +4,7 @@ namespace GoodFramework.Platform.Permissions
 {
     public static class PlatformPermissions
     {
-        public const string GroupName = "Platform";
+        public const string GroupName = "GoodFramework.Platform";
 
         public class DataDictionary
         {
