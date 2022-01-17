@@ -65,7 +65,7 @@
     },
     emits: ['change', 'register'],
     setup(props, { emit }) {
-      const { L } = useLocalization('AppPlatform');
+      const { L } = useLocalization('GoodFramework.Platform');
       const identityRef = ref('');
       const frameworkRef = ref('');
       const menuTreeRef = ref<any[]>([]);

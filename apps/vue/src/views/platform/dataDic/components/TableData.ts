@@ -3,7 +3,7 @@ import { useLocalization } from '/@/hooks/abp/useLocalization';
 import { valueTypeMaps } from './BasicType';
 import { DataItem } from '/@/api/platform/model/dataItemModel';
 
-const { L } = useLocalization('AppPlatform');
+const { L } = useLocalization('GoodFramework.Platform');
 
 export function getDataColumns(): BasicColumn[] {
   return [

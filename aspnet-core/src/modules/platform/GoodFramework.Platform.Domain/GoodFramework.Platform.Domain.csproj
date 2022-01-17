@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace />
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.AutoMapper" Version="5.1.1" />
+		<PackageReference Include="Volo.Abp.BlobStoring" Version="5.1.1" />
+		<PackageReference Include="Volo.Abp.Ddd.Domain" Version="5.1.1" />
+		<PackageReference Include="Volo.Abp.Settings" Version="5.1.1" />
+		<PackageReference Include="Volo.Abp.Identity.Domain" Version="5.1.1" />
+		<PackageReference Include="Volo.Abp.TenantManagement.Domain" Version="5.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\GoodFramework.Platform.Domain.Shared\GoodFramework.Platform.Domain.Shared.csproj" />
+	</ItemGroup>
+
+</Project>

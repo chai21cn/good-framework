@@ -86,7 +86,7 @@
     },
     setup() {
       const { L } = useLocalization('AbpIdentity');
-      const { L: PL } = useLocalization('AppPlatform');
+      const { L: PL } = useLocalization('GoodFramework.Platform');
       const loadMenuRef = ref(false);
       const { hasPermission } = usePermission();
       const [registerModal, { openModal }] = useModal();

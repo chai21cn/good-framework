@@ -20,7 +20,7 @@ interface UseMenuFormContext {
 }
 
 export function useMenuFormContext({ menuModel, formElRef }: UseMenuFormContext) {
-  const { L } = useLocalization('AppPlatform');
+  const { L } = useLocalization('GoodFramework.Platform');
 
   function getMetaFormSchemas(meta: DataItem[]): TabFormSchema[] {
     return meta.map((item) => {

@@ -48,7 +48,7 @@
       MenuDrawer,
     },
     setup() {
-      const { L } = useLocalization('AppPlatform', 'AbpUi');
+      const { L } = useLocalization('GoodFramework.Platform', 'AbpUi');
       const useFramework = ref('');
       const [registerTable, { reload: reloadTable }] = useTable({
         rowKey: 'id',

@@ -25,7 +25,7 @@
     },
     emits: ['change', 'register'],
     setup() {
-      const { L } = useLocalization('AppPlatform');
+      const { L } = useLocalization('GoodFramework.Platform');
       const layout = ref<Layout>({} as Layout);
       const formItems = getModalFormSchemas(layout.value);
       const [register, { closeModal }] = useModalInner((dataVal) => {

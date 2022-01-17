@@ -48,7 +48,7 @@
     },
     emits: ['change', 'append-item'],
     setup() {
-      const { L } = useLocalization('AppPlatform');
+      const { L } = useLocalization('GoodFramework.Platform');
       const title = L('DisplayName:DataDictionary');
       const treeData = ref<Data[]>();
       const replaceFields = ref({

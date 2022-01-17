@@ -28,7 +28,7 @@
     },
     setup() {
       const data = ref<Data>();
-      const { L } = useLocalization('AppPlatform');
+      const { L } = useLocalization('GoodFramework.Platform');
       const schemas = getDateFormSchemas(data.value);
 
       const [registerForm, { validate, getFieldsValue, resetFields }] = useForm({

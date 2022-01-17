@@ -28,7 +28,7 @@
     emits: ['change', 'register'],
     setup() {
       const dataItem = ref<DataItem>();
-      const { L } = useLocalization('AppPlatform');
+      const { L } = useLocalization('GoodFramework.Platform');
       const schemas = getDataItemFormSchemas(dataItem.value);
 
       const [registerForm, { validate, getFieldsValue }] = useForm({

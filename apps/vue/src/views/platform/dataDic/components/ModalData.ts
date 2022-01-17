@@ -5,7 +5,7 @@ import { DataItem } from '/@/api/platform/model/dataItemModel';
 
 import { valueTypeOptions } from './BasicType';
 
-const { L } = useLocalization('AppPlatform');
+const { L } = useLocalization('GoodFramework.Platform');
 
 /**
  * 构建数据字典表单

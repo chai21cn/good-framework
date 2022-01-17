@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace />
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="GoodFramework\Platform\Layouts\**" />
+	  <EmbeddedResource Remove="GoodFramework\Platform\Layouts\**" />
+	  <None Remove="GoodFramework\Platform\Layouts\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="GoodFramework\Platform\Localization\Resources\en.json" />
+		<None Remove="GoodFramework\Platform\Localization\Resources\zh-Hans.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="GoodFramework\Platform\Localization\Resources\en.json" />
+		<EmbeddedResource Include="GoodFramework\Platform\Localization\Resources\zh-Hans.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.Validation" Version="5.1.1" />
+	</ItemGroup>
+
+</Project>

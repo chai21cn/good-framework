@@ -1,4 +1,4 @@
-# Good.Framework.Platform.Domain
+# GoodFramework.Platform.Domain
 
 平台管理模块
 

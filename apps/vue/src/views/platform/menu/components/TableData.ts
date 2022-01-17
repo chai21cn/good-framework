@@ -2,7 +2,7 @@ import { BasicColumn } from '/@/components/Table/src/types/table';
 import { useLocalization } from '/@/hooks/abp/useLocalization';
 import { Menu } from '/@/api/platform/model/menuModel';
 
-const { L } = useLocalization('AppPlatform');
+const { L } = useLocalization('GoodFramework.Platform');
 
 export function getDataColumns(): BasicColumn[] {
   return [

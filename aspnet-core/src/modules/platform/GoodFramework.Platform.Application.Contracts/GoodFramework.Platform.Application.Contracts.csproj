@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace />
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="GoodFramework\Platform\Localization\ApplicationContracts\en.json" />
+		<None Remove="GoodFramework\Platform\Localization\ApplicationContracts\zh-Hans.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="GoodFramework\Platform\Localization\ApplicationContracts\en.json" />
+		<EmbeddedResource Include="GoodFramework\Platform\Localization\ApplicationContracts\zh-Hans.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.Ddd.Application" Version="5.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\GoodFramework.Platform.Domain.Shared\GoodFramework.Platform.Domain.Shared.csproj" />
+	</ItemGroup>
+
+</Project>

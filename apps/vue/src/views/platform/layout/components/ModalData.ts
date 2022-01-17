@@ -3,7 +3,7 @@ import { FormProps, FormSchema } from '/@/components/Form';
 import { Layout } from '/@/api/platform/model/layoutModel';
 import { getByName, getAll } from '/@/api/platform/dataDic';
 
-const { L } = useLocalization('AppPlatform');
+const { L } = useLocalization('GoodFramework.Platform');
 
 export function getSearchFormSchemas(): Partial<FormProps> {
   return {
