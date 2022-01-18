@@ -17,15 +17,12 @@ namespace GoodFramework.Platform.EntityFrameworkCore
         )]
     public class PlatformEntityFrameworkCoreModule : AbpModule
     {
-        public override void PreConfigureServices(ServiceConfigurationContext context)
-        {
+        public override void PreConfigureServices(ServiceConfigurationContext context) {
             PlatformEfCoreEntityExtensionMappings.Configure();
         }
 
-        public override void ConfigureServices(ServiceConfigurationContext context)
-        {
-            context.Services.AddAbpDbContext<PlatformDbContext>(options =>
-            {
+        public override void ConfigureServices(ServiceConfigurationContext context) {
+            context.Services.AddAbpDbContext<PlatformDbContext>(options => {
                 options.AddRepository<Data, EfCoreDataRepository>();
                 options.AddRepository<Menu, EfCoreMenuRepository>();
                 options.AddRepository<UserMenu, EfCoreUserMenuRepository>();
@@ -35,18 +32,10 @@ namespace GoodFramework.Platform.EntityFrameworkCore
 
                 options.AddDefaultRepositories(includeAllEntities: true);
 
-                options.Entity<AppVersion>(appVersion =>
-                {
+                options.Entity<AppVersion>(appVersion => {
                     appVersion.DefaultWithDetailsFunc = (x) =>
                         x.Include(q => q.Files);
                 });
-            });
-
-            Configure<AbpDbContextOptions>(options =>
-            {
-                /* The main point to change your DBMS.
-                 * See also FrameworkMigrationsDbContextFactory for EF Core tooling. */
-                options.UseSqlServer();
             });
         }
     }

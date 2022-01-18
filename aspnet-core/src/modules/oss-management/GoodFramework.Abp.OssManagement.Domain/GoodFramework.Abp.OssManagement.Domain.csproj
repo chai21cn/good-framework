@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace />
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.BlobStoring" Version="5.1.1" />
+		<PackageReference Include="Volo.Abp.Ddd.Domain" Version="5.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\common\GoodFramework.Abp.Features.LimitValidation\GoodFramework.Abp.Features.LimitValidation.csproj" />
+		<ProjectReference Include="..\GoodFramework.Abp.OssManagement.Domain.Shared\GoodFramework.Abp.OssManagement.Domain.Shared.csproj" />
+	</ItemGroup>
+
+</Project>

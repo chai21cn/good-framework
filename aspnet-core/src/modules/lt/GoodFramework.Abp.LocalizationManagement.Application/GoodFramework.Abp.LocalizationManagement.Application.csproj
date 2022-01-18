@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace />
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.Ddd.Application" Version="5.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\GoodFramework.Abp.LocalizationManagement.Domain\GoodFramework.Abp.LocalizationManagement.Domain.csproj" />
+	  <ProjectReference Include="..\GoodFramework.Abp.LocalizationManagement.Application.Contracts\GoodFramework.Abp.LocalizationManagement.Application.Contracts.csproj" />
+	</ItemGroup>
+
+</Project>

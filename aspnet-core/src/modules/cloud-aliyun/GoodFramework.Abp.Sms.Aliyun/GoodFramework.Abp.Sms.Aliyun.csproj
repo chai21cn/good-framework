@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace />
+		<Description>阿里云短信服务</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="GoodFramework\Abp\Sms\Aliyun\Localization\Resources\en.json" />
+		<None Remove="GoodFramework\Abp\Sms\Aliyun\Localization\Resources\zh-Hans.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="GoodFramework\Abp\Sms\Aliyun\Localization\Resources\en.json" />
+		<EmbeddedResource Include="GoodFramework\Abp\Sms\Aliyun\Localization\Resources\zh-Hans.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.Sms" Version="5.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\GoodFramework.Abp.Aliyun\GoodFramework.Abp.Aliyun.csproj" />
+	</ItemGroup>
+
+</Project>

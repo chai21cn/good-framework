@@ -40,7 +40,7 @@
               onClick: openClaimModal.bind(null, true, record, true),
             },
             {
-              auth: 'Platform.Menu.ManageRoles',
+              auth: 'GoodFramework.Platform.Menu.ManageRoles',
               label: PL('Menu:Manage'),
               onClick: handleSetMenu.bind(null, record),
             },

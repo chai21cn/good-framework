@@ -23,12 +23,5 @@ public class TaskManagementEntityFrameworkCoreModule : AbpModule
             options.AddRepository<BackgroundJobInfo, EfCoreBackgroundJobInfoRepository>();
             options.AddRepository<BackgroundJobLog, EfCoreBackgroundJobLogRepository>();
         });
-
-        Configure<AbpDbContextOptions>(options =>
-        {
-            /* The main point to change your DBMS.
-             * See also FrameworkMigrationsDbContextFactory for EF Core tooling. */
-            options.UseSqlServer();
-        });
     }
 }

@@ -71,7 +71,7 @@
               onClick: showPasswordModal.bind(null, record.id),
             },
             {
-              auth: 'Platform.Menu.ManageUsers',
+              auth: 'GoodFramework.Platform.Menu.ManageUsers',
               label: L('Menu:Manage'),
               onClick: handleSetMenu.bind(null, record),
             },

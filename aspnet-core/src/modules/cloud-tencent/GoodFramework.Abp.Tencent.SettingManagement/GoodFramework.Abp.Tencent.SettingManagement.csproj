@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<RootNamespace />
+	</PropertyGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="GoodFramework\Abp\Aliyun\SettingManagement\Localization\Resources\*.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="5.1.1" />
+		<PackageReference Include="Volo.Abp.SettingManagement.Domain" Version="5.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\settings\GoodFramework.Abp.SettingManagement.Application.Contracts\GoodFramework.Abp.SettingManagement.Application.Contracts.csproj" />
+	  <ProjectReference Include="..\GoodFramework.Abp.Sms.Tencent\GoodFramework.Abp.Sms.Tencent.csproj" />
+	  <ProjectReference Include="..\GoodFramework.Abp.Tencent\GoodFramework.Abp.Tencent.csproj" />
+	</ItemGroup>
+
+</Project>

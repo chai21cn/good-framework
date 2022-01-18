@@ -7,13 +7,13 @@
       <TableAction
         :actions="[
           {
-            auth: 'Platform.DataDictionary.Update',
+            auth: 'GoodFramework.Platform.DataDictionary.Update',
             label: L('Edit'),
             icon: 'ant-design:edit-outlined',
             onClick: handleEdit.bind(null, record),
           },
           {
-            auth: 'Platform.DataDictionary.ManageItems',
+            auth: 'GoodFramework.Platform.DataDictionary.ManageItems',
             color: 'error',
             label: L('Delete'),
             icon: 'ant-design:delete-outlined',

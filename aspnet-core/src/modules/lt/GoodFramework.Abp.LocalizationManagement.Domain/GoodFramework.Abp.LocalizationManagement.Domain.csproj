@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace />
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.AutoMapper" Version="5.1.1" />
+		<PackageReference Include="Volo.Abp.Ddd.Domain" Version="5.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\common\GoodFramework.Abp.Localization.Dynamic\GoodFramework.Abp.Localization.Dynamic.csproj" />
+	  <ProjectReference Include="..\GoodFramework.Abp.LocalizationManagement.Domain.Shared\GoodFramework.Abp.LocalizationManagement.Domain.Shared.csproj" />
+	</ItemGroup>
+
+</Project>

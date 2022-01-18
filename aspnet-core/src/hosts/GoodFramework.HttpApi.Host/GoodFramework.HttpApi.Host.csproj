@@ -30,7 +30,11 @@
     <ProjectReference Include="..\..\modules\basic\GoodFramework.Basic.Application\GoodFramework.Basic.Application.csproj" />
     <ProjectReference Include="..\..\modules\basic\GoodFramework.Basic.EntityFrameworkCore\GoodFramework.Basic.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\modules\basic\GoodFramework.Basic.HttpApi\GoodFramework.Basic.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\common\GoodFramework.Abp.ExceptionHandling.Notifications\GoodFramework.Abp.ExceptionHandling.Notifications.csproj" />
+    <ProjectReference Include="..\..\modules\common\GoodFramework.Abp.IM.SignalR\GoodFramework.Abp.IM.SignalR.csproj" />
     <ProjectReference Include="..\..\modules\common\GoodFramework.Abp.Localization.Dynamic\GoodFramework.Abp.Localization.Dynamic.csproj" />
+    <ProjectReference Include="..\..\modules\common\GoodFramework.Abp.Notifications.SignalR\GoodFramework.Abp.Notifications.SignalR.csproj" />
+    <ProjectReference Include="..\..\modules\common\GoodFramework.Abp.Notifications.Sms\GoodFramework.Abp.Notifications.Sms.csproj" />
     <ProjectReference Include="..\..\modules\identity-server\GoodFramework.Abp.IdentityServer.Application\GoodFramework.Abp.IdentityServer.Application.csproj" />
     <ProjectReference Include="..\..\modules\identity-server\GoodFramework.Abp.IdentityServer.EntityFrameworkCore\GoodFramework.Abp.IdentityServer.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\modules\identity-server\GoodFramework.Abp.IdentityServer.HttpApi\GoodFramework.Abp.IdentityServer.HttpApi.csproj" />
@@ -43,6 +47,18 @@
     <ProjectReference Include="..\..\modules\logging\GoodFramework.Abp.Logging.Serilog.Elasticsearch\GoodFramework.Abp.Logging.Serilog.Elasticsearch.csproj" />
 	<ProjectReference Include="..\..\modules\logging\GoodFramework.Abp.Serilog.Enrichers.Application\GoodFramework.Abp.Serilog.Enrichers.Application.csproj" />
     <ProjectReference Include="..\..\modules\logging\GoodFramework.Abp.Serilog.Enrichers.UniqueId\GoodFramework.Abp.Serilog.Enrichers.UniqueId.csproj" />
+    <ProjectReference Include="..\..\modules\lt\GoodFramework.Abp.LocalizationManagement.Application\GoodFramework.Abp.LocalizationManagement.Application.csproj" />
+    <ProjectReference Include="..\..\modules\lt\GoodFramework.Abp.LocalizationManagement.EntityFrameworkCore\GoodFramework.Abp.LocalizationManagement.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\modules\lt\GoodFramework.Abp.LocalizationManagement.HttpApi\GoodFramework.Abp.LocalizationManagement.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\message\GoodFramework.Abp.MessageService.Application\GoodFramework.Abp.MessageService.Application.csproj" />
+    <ProjectReference Include="..\..\modules\message\GoodFramework.Abp.MessageService.EntityFrameworkCore\GoodFramework.Abp.MessageService.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\modules\message\GoodFramework.Abp.MessageService.HttpApi\GoodFramework.Abp.MessageService.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\oss-management\GoodFramework.Abp.OssManagement.Aliyun\GoodFramework.Abp.OssManagement.Aliyun.csproj" />
+    <ProjectReference Include="..\..\modules\oss-management\GoodFramework.Abp.OssManagement.Application\GoodFramework.Abp.OssManagement.Application.csproj" />
+    <ProjectReference Include="..\..\modules\oss-management\GoodFramework.Abp.OssManagement.FileSystem.ImageSharp\GoodFramework.Abp.OssManagement.FileSystem.ImageSharp.csproj" />
+    <ProjectReference Include="..\..\modules\oss-management\GoodFramework.Abp.OssManagement.FileSystem\GoodFramework.Abp.OssManagement.FileSystem.csproj" />
+    <ProjectReference Include="..\..\modules\oss-management\GoodFramework.Abp.OssManagement.HttpApi\GoodFramework.Abp.OssManagement.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\oss-management\GoodFramework.Abp.OssManagement.SettingManagement\GoodFramework.Abp.OssManagement.SettingManagement.csproj" />
     <ProjectReference Include="..\..\modules\platform\GoodFramework.Platform.Application\GoodFramework.Platform.Application.csproj" />
     <ProjectReference Include="..\..\modules\platform\GoodFramework.Platform.EntityFrameworkCore\GoodFramework.Platform.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\modules\platform\GoodFramework.Platform.HttpApi\GoodFramework.Platform.HttpApi.csproj" />
@@ -54,6 +70,9 @@
     <ProjectReference Include="..\..\modules\task-management\GoodFramework.Abp.TaskManagement.Application\GoodFramework.Abp.TaskManagement.Application.csproj" />
     <ProjectReference Include="..\..\modules\task-management\GoodFramework.Abp.TaskManagement.EntityFrameworkCore\GoodFramework.Abp.TaskManagement.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\modules\task-management\GoodFramework.Abp.TaskManagement.HttpApi\GoodFramework.Abp.TaskManagement.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\tenants\GoodFramework.Abp.TenantManagement.Application\GoodFramework.Abp.TenantManagement.Application.csproj" />
+    <ProjectReference Include="..\..\modules\tenants\GoodFramework.Abp.TenantManagement.HttpApi\GoodFramework.Abp.TenantManagement.HttpApi.csproj" />
+    <ProjectReference Include="..\..\modules\wechat\GoodFramework.Abp.Notifications.WeChat.MiniProgram\GoodFramework.Abp.Notifications.WeChat.MiniProgram.csproj" />
   </ItemGroup>
 
   <ItemGroup>

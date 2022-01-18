@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace />
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="GoodFramework\Abp\ExceptionHandling\Emailing\Localization\Resources\en.json" />
+		<None Remove="GoodFramework\Abp\ExceptionHandling\Emailing\Localization\Resources\zh-Hans.json" />
+		<None Remove="GoodFramework\Abp\ExceptionHandling\Emailing\Templates\SendEmail\en.tpl" />
+		<None Remove="GoodFramework\Abp\ExceptionHandling\Emailing\Templates\SendEmail\zh-Hans.tpl" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="GoodFramework\Abp\ExceptionHandling\Emailing\Localization\Resources\en.json" />
+		<EmbeddedResource Include="GoodFramework\Abp\ExceptionHandling\Emailing\Localization\Resources\zh-Hans.json" />
+		<EmbeddedResource Include="GoodFramework\Abp\ExceptionHandling\Emailing\Templates\SendEmail\en.tpl" />
+		<EmbeddedResource Include="GoodFramework\Abp\ExceptionHandling\Emailing\Templates\SendEmail\zh-Hans.tpl" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.Emailing" Version="5.1.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\GoodFramework.Abp.ExceptionHandling\GoodFramework.Abp.ExceptionHandling.csproj" />
+	</ItemGroup>
+
+</Project>

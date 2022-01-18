@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace />
+		<Description>腾讯云Oss对象存储Abp集成</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.BlobStoring" Version="5.1.1" />
+		<PackageReference Include="Tencent.QCloud.Cos.Sdk" Version="5.4.26" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\GoodFramework.Abp.Tencent\GoodFramework.Abp.Tencent.csproj" />
+	</ItemGroup>
+
+</Project>

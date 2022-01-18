@@ -1,0 +1,11 @@
+{
+  "culture": "en",
+  "texts": {
+    "Permission:MessageService": "Message service",
+    "Permission:Notification": "Notification",
+    "Permission:Delete": "Delete",
+    "Permission:Hangfire": "Hangfire",
+    "Permission:Dashboard": "Dashboard",
+    "Permission:ManageQueue": "Manage queue"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "culture": "en",
+  "texts": {
+    "TextTemplate:ExceptionHandlingTemplates.SendEmail": "Apply the exception message sending template",
+    "SendEmailTitle": "Application exception push",
+    "SendEmailHeader": "Application exception"
+  }
+}

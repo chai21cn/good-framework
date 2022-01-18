@@ -5,9 +5,16 @@ using GoodFramework.Abp.IdentityServer;
 using GoodFramework.Abp.IdentityServer.EntityFrameworkCore;
 using GoodFramework.Abp.IdentityServer.WeChat;
 using GoodFramework.Abp.Localization.CultureMap;
+using GoodFramework.Abp.LocalizationManagement;
+using GoodFramework.Abp.LocalizationManagement.EntityFrameworkCore;
+using GoodFramework.Abp.OssManagement;
+using GoodFramework.Abp.OssManagement.FileSystem;
+using GoodFramework.Abp.OssManagement.FileSystem.ImageSharp;
+using GoodFramework.Abp.OssManagement.SettingManagement;
 using GoodFramework.Abp.Serilog.Enrichers.Application;
 using GoodFramework.Abp.Serilog.Enrichers.UniqueId;
 using GoodFramework.Abp.SettingManagement;
+using GoodFramework.Abp.TenantManagement;
 using GoodFramework.Basic;
 using GoodFramework.Basic.EntityFrameworkCore;
 using GoodFramework.Basic.MultiTenancy;
@@ -25,6 +32,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
@@ -37,7 +46,12 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
+using Volo.Abp.BlobStoring;
+using Volo.Abp.BlobStoring.FileSystem;
+using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Identity.Localization;
+using Volo.Abp.Json;
+using Volo.Abp.Json.SystemTextJson;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
@@ -55,6 +69,10 @@ namespace GoodFramework
         typeof(PlatformHttpApiModule),
         typeof(PlatformApplicationModule),
         typeof(PlatformEntityFrameworkCoreModule),
+        // LocalizationManagement
+        typeof(AbpLocalizationManagementHttpApiModule),
+        typeof(AbpLocalizationManagementApplicationModule),
+        typeof(AbpLocalizationManagementEntityFrameworkCoreModule),
         // Account
         typeof(AbpAccountHttpApiModule),
         typeof(AbpAccountApplicationModule),
@@ -73,6 +91,26 @@ namespace GoodFramework
         //typeof(TaskManagementHttpApiModule),
         //typeof(TaskManagementApplicationModule),
         //typeof(TaskManagementEntityFrameworkCoreModule),
+        // MessageService
+        //typeof(AbpIMSignalRModule),
+        //typeof(AbpMessageServiceApplicationModule),
+        //typeof(AbpMessageServiceHttpApiModule),
+        //typeof(AbpMessageServiceEntityFrameworkCoreModule),
+        // Notifications
+        //typeof(AbpNotificationsSmsModule),
+        //typeof(AbpNotificationsSignalRModule),
+        //typeof(AbpNotificationsWeChatMiniProgramModule),
+        //typeof(AbpNotificationsExceptionHandlingModule),
+        // OSS管理
+        //typeof(AbpOssManagementAliyunModule),
+        typeof(AbpOssManagementFileSystemModule),           // 本地文件系统提供者模块
+        typeof(AbpOssManagementFileSystemImageSharpModule), // 本地文件系统图形处理模块
+        typeof(AbpOssManagementApplicationModule),
+        typeof(AbpOssManagementHttpApiModule),
+        typeof(AbpOssManagementSettingManagementModule),
+        // TenantManagement
+        typeof(AbpTenantManagementApplicationModule),
+        typeof(AbpTenantManagementHttpApiModule),
         // 设置
         typeof(AbpSettingManagementHttpApiModule),
         typeof(AbpSettingManagementApplicationModule),
@@ -108,6 +146,10 @@ namespace GoodFramework
             ConfigureVirtualFileSystem(context);
             ConfigureCors(context, configuration);
             ConfigureSwaggerServices(context, configuration);
+
+            ConfigureDbContext();
+            ConfigureBlobStoring();
+            ConfigureJsonSerializer();
         }
 
         private void ConfigureBundles()
@@ -130,6 +172,40 @@ namespace GoodFramework
 
                 options.Applications["Angular"].RootUrl = configuration["App:ClientUrl"];
                 options.Applications["Angular"].Urls[AccountUrlNames.PasswordReset] = "account/reset-password";
+            });
+        }
+
+        private void ConfigureBlobStoring() {
+            Configure<AbpBlobStoringOptions>(options =>
+            {
+                options.Containers.ConfigureAll((containerName, containerConfiguration) =>
+                {
+                    containerConfiguration.UseFileSystem(fileSystem =>
+                    {
+                        fileSystem.BasePath = Path.Combine(Directory.GetCurrentDirectory(), "file-blob-storing");
+                    });
+                });
+            });
+        }
+
+        private void ConfigureDbContext() {
+            // 配置Ef
+            Configure<AbpDbContextOptions>(options =>
+            {
+                options.UseSqlServer();
+            });
+        }
+
+        private void ConfigureJsonSerializer() {
+            // 统一时间日期格式
+            Configure<AbpJsonOptions>(options =>
+            {
+                options.DefaultDateTimeFormat = "yyyy-MM-dd HH:mm:ss";
+            });
+            // 中文序列化的编码问题
+            Configure<AbpSystemTextJsonSerializerOptions>(options =>
+            {
+                options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
             });
         }
 
@@ -258,6 +334,74 @@ namespace GoodFramework
                 });
             });
         }
+
+        #region 注释
+        //private void ConfigreExceptionHandling() {
+        //    // 自定义需要处理的异常
+        //    Configure<AbpExceptionHandlingOptions>(options =>
+        //    {
+        //        //  加入需要处理的异常类型
+        //        options.Handlers.Add<Volo.Abp.Data.AbpDbConcurrencyException>();
+        //        options.Handlers.Add<AbpInitializationException>();
+        //        options.Handlers.Add<ObjectDisposedException>();
+        //        options.Handlers.Add<StackOverflowException>();
+        //        options.Handlers.Add<OutOfMemoryException>();
+        //        options.Handlers.Add<System.Data.Common.DbException>();
+        //        options.Handlers.Add<Microsoft.EntityFrameworkCore.DbUpdateException>();
+        //        options.Handlers.Add<System.Data.DBConcurrencyException>();
+        //    });
+        //    // 自定义需要发送邮件通知的异常类型
+        //    Configure<AbpEmailExceptionHandlingOptions>(options =>
+        //    {
+        //        // 是否发送堆栈信息
+        //        options.SendStackTrace = true;
+        //    });
+
+        //    Configure<Volo.Abp.AspNetCore.ExceptionHandling.AbpExceptionHandlingOptions>(options =>
+        //    {
+        //        // 是否发送错误详情
+        //        options.SendExceptionsDetailsToClients = false;
+        //    });
+        //}
+
+        //private void ConfigureCaching(IConfiguration configuration) {
+        //    Configure<AbpDistributedCacheOptions>(options =>
+        //    {
+        //        // 最好统一命名,不然某个缓存变动其他应用服务有例外发生
+        //        options.KeyPrefix = "GoodFramework.Abp.Application";
+        //        // 滑动过期30天
+        //        options.GlobalCacheEntryOptions.SlidingExpiration = TimeSpan.FromDays(30d);
+        //        // 绝对过期60天
+        //        options.GlobalCacheEntryOptions.AbsoluteExpiration = DateTimeOffset.Now.AddDays(60d);
+        //    });
+
+        //    Configure<RedisCacheOptions>(options =>
+        //    {
+        //        var redisConfig = ConfigurationOptions.Parse(options.Configuration);
+        //        options.ConfigurationOptions = redisConfig;
+        //        options.InstanceName = configuration["Redis:InstanceName"];
+        //    });
+        //}
+
+        //private void ConfigureMultiTenancy(IConfiguration configuration) {
+        //    // 多租户
+        //    Configure<AbpMultiTenancyOptions>(options =>
+        //    {
+        //        options.IsEnabled = true;
+        //    });
+
+        //    var tenantResolveCfg = configuration.GetSection("App:Domains");
+        //    if (tenantResolveCfg.Exists()) {
+        //        Configure<AbpTenantResolveOptions>(options =>
+        //        {
+        //            var domains = tenantResolveCfg.Get<string[]>();
+        //            foreach (var domain in domains) {
+        //                options.AddDomainTenantResolver(domain);
+        //            }
+        //        });
+        //    }
+        //}
+        #endregion
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
         {

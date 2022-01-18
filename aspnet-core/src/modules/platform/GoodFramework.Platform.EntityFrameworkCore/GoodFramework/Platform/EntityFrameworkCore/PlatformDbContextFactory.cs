@@ -5,13 +5,11 @@ namespace GoodFramework.Platform.EntityFrameworkCore
 {
     public class PlatformDbContextFactory : BaseDbContextFactory<PlatformDbContext>
     {
-        protected override void PreCreateDbContext()
-        {
+        protected override void PreCreateDbContext() {
             PlatformEfCoreEntityExtensionMappings.Configure();
         }
 
-        protected override PlatformDbContext CreateDbContext(DbContextOptions<PlatformDbContext> options)
-        {
+        protected override PlatformDbContext CreateDbContext(DbContextOptions<PlatformDbContext> options) {
             return new PlatformDbContext(options);
         }
     }

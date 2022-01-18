@@ -1,0 +1,10 @@
+{
+  "culture": "en",
+  "texts": {
+    "DisplayName:Name": "Name",
+    "DisplayName:Value": "Value",
+    "TenantNotFoundById": "Tenant: {0} not found!",
+    "TenantNotFoundByName": "Tenant: {0} not found!",
+    "GoodFramework.Abp.MultiTenancy:010001": "The database string that cannot be connected!"
+  }
+}

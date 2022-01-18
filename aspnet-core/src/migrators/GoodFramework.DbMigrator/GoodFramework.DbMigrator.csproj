@@ -36,11 +36,17 @@
     <ProjectReference Include="..\..\modules\basic\GoodFramework.Basic.EntityFrameworkCore\GoodFramework.Basic.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\modules\identity\GoodFramework.Abp.Identity.Application.Contracts\GoodFramework.Abp.Identity.Application.Contracts.csproj" />
     <ProjectReference Include="..\..\modules\identity\GoodFramework.Abp.Identity.EntityFrameworkCore\GoodFramework.Abp.Identity.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\modules\lt\GoodFramework.Abp.LocalizationManagement.Application.Contracts\GoodFramework.Abp.LocalizationManagement.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\modules\lt\GoodFramework.Abp.LocalizationManagement.EntityFrameworkCore\GoodFramework.Abp.LocalizationManagement.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\modules\message\GoodFramework.Abp.MessageService.Application.Contracts\GoodFramework.Abp.MessageService.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\modules\message\GoodFramework.Abp.MessageService.EntityFrameworkCore\GoodFramework.Abp.MessageService.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\modules\oss-management\GoodFramework.Abp.OssManagement.Application.Contracts\GoodFramework.Abp.OssManagement.Application.Contracts.csproj" />
     <ProjectReference Include="..\..\modules\platform\GoodFramework.Abp.UI.Navigation.VueVbenAdmin\GoodFramework.Abp.UI.Navigation.VueVbenAdmin.csproj" />
     <ProjectReference Include="..\..\modules\platform\GoodFramework.Platform.Application.Contracts\GoodFramework.Platform.Application.Contracts.csproj" />
     <ProjectReference Include="..\..\modules\platform\GoodFramework.Platform.EntityFrameworkCore\GoodFramework.Platform.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\modules\task-management\GoodFramework.Abp.TaskManagement.Application.Contracts\GoodFramework.Abp.TaskManagement.Application.Contracts.csproj" />
     <ProjectReference Include="..\..\modules\task-management\GoodFramework.Abp.TaskManagement.EntityFrameworkCore\GoodFramework.Abp.TaskManagement.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\modules\tenants\GoodFramework.Abp.TenantManagement.Application.Contracts\GoodFramework.Abp.TenantManagement.Application.Contracts.csproj" />
     <ProjectReference Include="..\GoodFramework.DbMigrator.Domain\GoodFramework.DbMigrator.Domain.csproj" />
   </ItemGroup>
 

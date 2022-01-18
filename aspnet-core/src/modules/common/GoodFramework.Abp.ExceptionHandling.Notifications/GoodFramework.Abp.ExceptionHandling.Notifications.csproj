@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace />
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="GoodFramework\Abp\ExceptionHandling\Notifications\Localization\Resources\en.json" />
+		<None Remove="GoodFramework\Abp\ExceptionHandling\Notifications\Localization\Resources\zh-Hans.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="GoodFramework\Abp\ExceptionHandling\Notifications\Localization\Resources\en.json" />
+		<EmbeddedResource Include="GoodFramework\Abp\ExceptionHandling\Notifications\Localization\Resources\zh-Hans.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Volo.Abp.Localization" Version="5.1.1" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<ProjectReference Include="..\GoodFramework.Abp.ExceptionHandling\GoodFramework.Abp.ExceptionHandling.csproj" />
+		<ProjectReference Include="..\GoodFramework.Abp.Notifications\GoodFramework.Abp.Notifications.csproj" />
+	</ItemGroup>
+
+</Project>

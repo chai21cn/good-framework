@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace />
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\cloud-tencent\GoodFramework.Abp.BlobStoring.Tencent\GoodFramework.Abp.BlobStoring.Tencent.csproj" />
+		<ProjectReference Include="..\GoodFramework.Abp.OssManagement.Domain\GoodFramework.Abp.OssManagement.Domain.csproj" />
+	</ItemGroup>
+
+</Project>

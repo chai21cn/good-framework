@@ -8,13 +8,13 @@
         <TableAction
           :actions="[
             {
-              auth: 'Platform.Layout.Update',
+              auth: 'GoodFramework.Platform.Layout.Update',
               label: L('Edit'),
               icon: 'ant-design:edit-outlined',
               onClick: handleEdit.bind(null, record),
             },
             {
-              auth: 'Platform.Layout.Delete',
+              auth: 'GoodFramework.Platform.Layout.Delete',
               color: 'error',
               label: L('Delete'),
               icon: 'ant-design:delete-outlined',
